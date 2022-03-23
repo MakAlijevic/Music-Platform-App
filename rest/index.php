@@ -9,3 +9,9 @@ require_once '../vendor/autoload.php';
 Flight::register('dao', 'MusicPlatformDAO');
 
 // CRUD operations for todos entity
+
+//List all objects from database user
+
+Flight::route('GET /user', function(){
+  Flight::json(Flight::dao()->get_all());
+});

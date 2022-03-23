@@ -31,11 +31,13 @@ class MusicPlatformDAO{
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return reset($result);
 
+  }
+
    //Add object to database
 
    public function addToDatabase($username,$password,$email)
    {
-     $stmt= $this->conn->prepare(INSERT INTO user (username,password,email) VALUES (:username,:password,:email));
+     $stmt= $this->conn->prepare("INSERT INTO user (username,password,email) VALUES (:username,:password,:email)");
      $stmt->execute();
 
    }
