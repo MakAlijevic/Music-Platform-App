@@ -34,10 +34,11 @@ class MusicPlatformDAO{
 
    //Add object to table user
 
-   public function addToDatabase($username,$password,$email)
-   {
+   public function addToDatabase($user){
      $stmt= $this->conn->prepare("INSERT INTO user (username,password,email) VALUES (:username,:password,:email)");
-     $stmt->execute();
+     $stmt->execute($user);
+     $user['userID'] = $this->conn->lastInsertId();
+     return $user;
 
    }
 
@@ -54,9 +55,9 @@ class MusicPlatformDAO{
 
   public function update($user){
     $stmt = $this->conn->prepare("UPDATE user SET username = :username, password =:password, email =:email WHERE id=:id");
-    $stmt->execute($todo);
-    return $todo;
+    $stmt->execute($user);
+    return $user;
     }
   }
-  
+
 ?>
