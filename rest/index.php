@@ -26,7 +26,22 @@ Flight::route('GET /user/@userID', function($id){
 
 //Add objects to database user
 Flight::route('POST /user', function()){
-  Flight::json(Flight::dao()->addToDatabase(Flight::request()->data->getData()));
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::dao()->addToDatabase($data);
+});
+
+//Update objects in database user by userID
+Flight::route('PUT /user/@userID', function($id){
+  $data = Flight::request()->data->getData();
+  $data['userID'] = $id;
+  Flight::json(Flight::dao()->update($data));
+});
+
+
+//Delete objects from database user by userID
+Flight::route('DELETE /user/@userID', function($id){
+  Flight::dao()->delete($id);
+  Flight::json(["message" => "Deleted!"]);
 });
 
 

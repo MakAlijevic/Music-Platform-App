@@ -35,7 +35,7 @@ class MusicPlatformDAO{
    //Add object to table user
 
    public function addToDatabase($user){
-     $stmt= $this->conn->prepare("INSERT INTO user (username,password,email) VALUES (:username,:password,:email)");
+     $stmt= $this->conn->prepare("INSERT INTO user (username,password,email,name,surname,gender,dob,created) VALUES (:username,:password,:email,:name,:surname,:gender,:dob,:created)");
      $stmt->execute($user);
      $user['userID'] = $this->conn->lastInsertId();
      return $user;
