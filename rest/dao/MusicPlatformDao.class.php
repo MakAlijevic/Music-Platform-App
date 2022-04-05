@@ -26,7 +26,7 @@ class MusicPlatformDAO{
 
  public function get_by_id($id){
     $stmt = $this->conn->prepare("SELECT * FROM user WHERE userID=:id");
-    $stmt->execute(['userID' => $id]);
+    $stmt->execute(['id' => $id]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return reset($result);
 

@@ -20,14 +20,14 @@ Flight::route('GET /user', function(){
 });
 
 //list individual objects from database user by userID
-Flight::route('GET /user/@userID', function($id){
+Flight::route('GET /user/@id', function($id){
   Flight::json(Flight::dao()->get_by_id($id));
 });
 
 //Add objects to database user
-Flight::route('POST /user', function()){
+Flight::route('POST /user', function(){
   $data = Flight::request()->data->getData();
-  Flight::json(Flight::dao()->addToDatabase($data);
+  Flight::json(Flight::dao()->addToDatabase($data));
 });
 
 //Update objects in database user by userID
@@ -39,7 +39,7 @@ Flight::route('PUT /user/@userID', function($id){
 
 
 //Delete objects from database user by userID
-Flight::route('DELETE /user/@userID', function($id){
+Flight::route('DELETE /user/@user', function($id){
   Flight::dao()->delete($id);
   Flight::json(["message" => "Deleted!"]);
 });
