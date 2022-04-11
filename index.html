@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>SoundWave</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
 
   <body class="text-center">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-transparent">
         <a class="navbar-brand ms-5" href="#">SoundWave</a>
-        <button class="navbar-toggler"
+        <button
+          class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#toggleMobileMenu"
           aria-controls="toggleMobileMenu"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -33,24 +34,104 @@
           </ul>
         </div>
       </nav>
+
       <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
         <main role="main" class="inner cover">
           <h1 class="cover-heading text-center">SoundWave</h1>
-          <p class="lead text-center">Get the most effortless audio entertainment for you! Only on SoundWave!</p>
-            <a href="#" class="btn btn-lg btn-secondary">Sign Up</a>
+          <p class="lead text-center">
+            Get the most effortless audio entertainment for you! Only on
+            SoundWave!
           </p>
+          <button
+            type="button"
+            class="btn btn-lg btn-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Sign Up
+          </button>
         </main>
       </div>
     </div>
   </body>
 
-  <script src = "javaScript/jquery-3.6.0.min.js"></script>
-
+  <script src="javaScript/jquery-3.6.0.min.js"></script>
+  <script src="javaScript\bootstrap.bundle.min.js"></script>
 
   <script>
-    $.get("rest/user", function(data){
+    $.get("rest/user", function (data) {
       console.log(data);
     });
-
   </script>
+
+<!-- Modal -->
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#301934" >Sign up</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form class="mx-1 mx-md-4">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" class="form-control" />
+                      <label class="form-label" for="form3Example1c" style="color:#301934">Your Name</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" class="form-control" />
+                      <label class="form-label" for="form3Example3c" style="color:#301934">Your Email</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" />
+                      <label class="form-label" for="form3Example4c" style="color:#301934">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4cd" class="form-control" />
+                      <label class="form-label" for="form3Example4cd" style="color:#301934" >Repeat your password</label>
+                    </div>
+                  </div>
+
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </html>

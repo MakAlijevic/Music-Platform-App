@@ -27,3 +27,7 @@ body {
   padding: .75rem 1.25rem;
   font-weight: 700;
 }
+
+.modal-content {
+   background-color: red;
+}
