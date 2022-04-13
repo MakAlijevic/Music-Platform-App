@@ -62,6 +62,33 @@
     $.get("rest/user", function (data) {
       console.log(data);
     });
+
+    function addTodo(){
+      var user = {};
+      user.username = $('#add_username').val();
+      user.password = $('#add_password').val();
+      user.email = $('#add_email').val();
+      user.name = $('#add_name').val();
+      user.surname = $('#add_surname').val();
+      user.gender = $('#add_gender').val();
+      user.dob = $('#add_dob').val();
+      user.created = $('#add_created').val();
+
+      $.ajax({
+        url: 'rest/user',
+        type: 'POST',
+        data: JSON.stringify(user),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result) {
+            $("#todo-list").html('<div class="spinner-border" role="status"> <span class="sr-only"></span>  </div>');
+            getTodos(); // perf optimization
+            console.log(result);
+            $("#addToDoModal").modal("hide");
+        }
+      });
+    }
+
   </script>
 
 <!-- Modal -->
@@ -75,85 +102,84 @@
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header ms-2">
-          <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#301934" >Sign up</h5>
-        </div>
-        <div class="modal-body">
-          <form class="mx-1 mx-md-4">
+        <form class="mx-1 mx-md-4" method="post">
+          <div class="modal-header ms-2">
+            <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#301934" >Sign up</h5>
+          </div>
+          <div class="modal-body">
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" />
-                      <label class="form-label" for="form3Example1c" style="color:#301934">Your Name</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" class="form-control" />
+                        <label class="form-label" for="form3Example1c" style="color:#301934">Your Name</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" />
-                      <label class="form-label" for="form3Example3c" style="color:#301934">Your Surname</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" />
+                        <label class="form-label" for="form3Example3c" style="color:#301934">Your Surname</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" />
-                      <label class="form-label" for="form3Example3c" style="color:#301934">Username</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" />
+                        <label class="form-label" for="form3Example3c" style="color:#301934">Username</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" />
-                      <label class="form-label" for="form3Example4c" style="color:#301934">Password</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4c" class="form-control" />
+                        <label class="form-label" for="form3Example4c" style="color:#301934">Password</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" class="form-control" />
-                      <label class="form-label" for="form3Example4cd" style="color:#301934" >Repeat your password</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4cd" class="form-control" />
+                        <label class="form-label" for="form3Example4cd" style="color:#301934" >Repeat your password</label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioMale" value="option1">
-                    <label class="form-check-label" for="inlineRadio1" style="color:#301934">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioFemale" value="option2">
-                    <label class="form-check-label" for="inlineRadio2" style="color:#301934">Female</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioOther" value="option3">
-                    <label class="form-check-label" for="inlineRadio3" style="color:#301934">Other</label>
-                  </div>
-                  <div class="form-group" style="color:#301934; padding: 20px;">
-                    <label>Date of Birth</label>
-                    <input name="created" type="date" class="form-control required" placeholder="Date of Birth">
-                  </div>
-                  <div class="form-group" style="color:#301934; padding: 20px;" hidden>
-                    <label>Date of Birth</label>
-                    <input name="created" type="date" class="form-control required" placeholder="Date of Birth">
-                  </div>
-
-                </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Register</button>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioMale" value="option1">
+                      <label class="form-check-label" for="inlineRadio1" style="color:#301934">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioFemale" value="option2">
+                      <label class="form-check-label" for="inlineRadio2" style="color:#301934">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioOther" value="option3">
+                      <label class="form-check-label" for="inlineRadio3" style="color:#301934">Other</label>
+                    </div>
+                    <div class="form-group" style="color:#301934; padding: 20px;">
+                      <label>Date of Birth</label>
+                      <input name="created" type="date" class="form-control required" placeholder="Date of Birth">
+                    </div>
+                    <div class="form-group" style="color:#301934; padding: 20px;">
+                      <label>Created</label>
+                      <input name="created" type="date" class="form-control required" placeholder="Created">
+                    </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="addTodo()">Register</button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </html>
