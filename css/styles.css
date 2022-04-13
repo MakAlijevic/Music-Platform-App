@@ -21,7 +21,12 @@ body {
 .cover {
   padding: 200px 0;
 }
+
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
+}
+
+.modal-content {
+  background-color: #383F51;
 }
