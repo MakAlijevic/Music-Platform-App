@@ -3,48 +3,41 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'dao/MusicPlatformDao.class.php';
+require_once 'dao/SoundwaveDao.class.php';
 require_once '../vendor/autoload.php';
 
-Flight::register('dao', 'MusicPlatformDAO');
+//dao to flightPHP extend
+Flight::register('soundwavedao', 'SoundwaveDao');
 
+//CRUD operations for database table user
 
-
-
-// CRUD operations for todos entity
-
-//List all objects from database user
-
+//list all users
 Flight::route('GET /user', function(){
-  Flight::json(Flight::dao()->get_all());
+  Flight::json(Flight::soundwavedao()->get_all());
 });
 
-//list individual objects from database user by userID
+//list individual user
 Flight::route('GET /user/@id', function($id){
-  Flight::json(Flight::dao()->get_by_id($id));
+  Flight::json(Flight::soundwavedao()->get_by_id($id));
 });
 
-//Add objects to database user
+//add user
 Flight::route('POST /user', function(){
+  Flight::json(Flight::soundwavedao()->add_element(Flight::request()->data->getData()));
+});
+
+//delete user
+Flight::route('DELETE /user/@id', function($id){
+  Flight::soundwavedao()->delete_element($id);
+  Flight::json(["message" => "deleted"]);
+});
+
+//update user
+Flight::route('PUT /user/@id', function($id){
   $data = Flight::request()->data->getData();
-  Flight::json(Flight::dao()->addToDatabase($data));
+  $data['id'] = $id;
+  Flight::json(Flight::soundwavedao()->update_element($data));
 });
-
-//Update objects in database user by userID
-Flight::route('PUT /user/@userID', function($id){
-  $data = Flight::request()->data->getData();
-  $data['userID'] = $id;
-  Flight::json(Flight::dao()->update($data));
-});
-
-
-//Delete objects from database user by userID
-Flight::route('DELETE /user/@user', function($id){
-  Flight::dao()->delete($id);
-  Flight::json(["message" => "Deleted!"]);
-});
-
-
 
 Flight::start();
 ?>

@@ -45,15 +45,6 @@
   </div>
 </body>
 
-<script src="javaScript/jquery-3.6.0.min.js"></script>
-<script src="javaScript\bootstrap.bundle.min.js"></script>
-
-<script>
-  $.get("rest/user", function (data) {
-    console.log(data);
-  });
-</script>
-
 <!-- Modal SignUp -->
 
 <div class="modal fade" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,22 +60,22 @@
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input type="text" id="form3Example1c" class="form-control" />
-              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
+              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">First Name</label>
             </div>
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="email" id="form3Example3c" class="form-control" />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
+              <input type="text" id="form3Example3c" class="form-control" />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Last Name</label>
             </div>
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="email" id="form3Example3c" class="form-control" />
+              <input type="text" id="form3Example3c" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -104,27 +95,16 @@
               <label class="form-label" for="form3Example4cd" style="color:#DDDBF1">Repeat your password</label>
             </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioMale" value="option1">
-            <label class="form-check-label" for="inlineRadio1" style="color:#DDDBF1">Male</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioFemale"
-              value="option2">
-            <label class="form-check-label" for="inlineRadio2" style="color:#DDDBF1">Female</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioOther"
-              value="option3">
-            <label class="form-check-label" for="inlineRadio3" style="color:#DDDBF1">Other</label>
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input type="email" id="form3Example3c" class="form-control" />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Email</label>
+            </div>
           </div>
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <label>Date of Birth</label>
             <input name="created" type="date" class="form-control required" placeholder="Date of Birth">
-          </div>
-          <div class="form-group" style="color:#DDDBF1; padding: 20px;">
-            <label>Created</label>
-            <input name="created" type="date" class="form-control required" placeholder="Created">
           </div>
         </div>
         <div class="modal-footer">
@@ -173,5 +153,14 @@
     </div>
   </div>
 </div>
+
+<script src="javaScript/jquery-3.6.0.min.js"></script>
+<script src="javaScript\bootstrap.bundle.min.js"></script>
+
+<script>
+  $.get("rest/user", function (data) {
+    console.log(data);
+  });
+</script>
 
 </html>
