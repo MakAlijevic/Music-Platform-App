@@ -45,6 +45,10 @@
   </div>
 </body>
 
+<script src="javaScript/jquery-3.6.0.min.js"></script>
+<script src="javaScript\bootstrap.bundle.min.js"></script>
+
+
 <!-- Modal SignUp -->
 
 <div class="modal fade" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,23 +63,31 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="text" id="form3Example1c" class="form-control" />
-              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">First Name</label>
+              <input name="name" type="text" id="name" class="form-control" />
+              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
             </div>
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="text" id="form3Example3c" class="form-control" />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Last Name</label>
+              <input name="surname" type="text" id="surname" class="form-control" />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
             </div>
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="text" id="form3Example3c" class="form-control" />
+              <input type="text" id="email" class="form-control" />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input name="username" type="text" id="username" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -83,36 +95,22 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="password" id="form3Example4c" class="form-control" />
+              <input name="password " type="password" id="password" class="form-control" />
               <label class="form-label" for="form3Example4c" style="color:#DDDBF1">Password</label>
             </div>
           </div>
 
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-              <input type="password" id="form3Example4cd" class="form-control" />
-              <label class="form-label" for="form3Example4cd" style="color:#DDDBF1">Repeat your password</label>
-            </div>
-          </div>
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-              <input type="email" id="form3Example3c" class="form-control" />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Email</label>
-            </div>
-          </div>
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <label>Date of Birth</label>
-            <input name="created" type="date" class="form-control required" placeholder="Date of Birth">
+            <input name="dob" type="date" id="dateOfBirth" class="form-control" placeholder="Date of Birth">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Register</button>
-        </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button id="register" type="button" class="btn btn-primary">Register</button>
+          </div>
       </form>
     </div>
   </div>
@@ -153,14 +151,42 @@
     </div>
   </div>
 </div>
-
-<script src="javaScript/jquery-3.6.0.min.js"></script>
-<script src="javaScript\bootstrap.bundle.min.js"></script>
-
 <script>
+
   $.get("rest/user", function (data) {
     console.log(data);
   });
+
+
+
+  $("#register").on('click', function () {
+
+    var user = {};
+    user.name = $('#name').val();
+    user.surname = $('#surname').val();
+    user.username = $('#username').val();
+    user.password = $('#password').val();
+    user.email = $('#email').val();
+    user.dateOfBirth = $('#dateOfBirth').val();
+
+    $.ajax({
+      type: "POST",
+      url: ' rest/user',
+      data: JSON.stringify(user),
+      contentType: "application/json",
+      dataType: "json",
+
+      success: function (data) {
+        if (data.d == "success") {
+          alert("Data saved successfully");
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(thrownError);
+      }
+    });
+  });
+
 </script>
 
 </html>
