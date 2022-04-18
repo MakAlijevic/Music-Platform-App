@@ -63,7 +63,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="name" type="text" id="name" class="form-control" />
+              <input name="name" type="text" id="registerName" class="form-control" />
               <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
             </div>
           </div>
@@ -71,7 +71,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="surname" type="text" id="surname" class="form-control" />
+              <input name="surname" type="text" id="registerSurname" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="text" id="email" class="form-control" />
+              <input type="text" id="registerEmail" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="username" type="text" id="username" class="form-control" />
+              <input name="username" type="text" id="registerUsername" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -95,14 +95,14 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="password " type="password" id="password" class="form-control" />
+              <input name="password " type="password" id="registerPassword" class="form-control" />
               <label class="form-label" for="form3Example4c" style="color:#DDDBF1">Password</label>
             </div>
           </div>
 
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <label>Date of Birth</label>
-            <input name="dob" type="date" id="dateOfBirth" class="form-control" placeholder="Date of Birth">
+            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth">
           </div>
 
           <div class="modal-footer">
@@ -111,6 +111,7 @@
             </button>
             <button id="register" type="button" class="btn btn-primary">Register</button>
           </div>
+        </div>
       </form>
     </div>
   </div>
@@ -126,10 +127,11 @@
           <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#DDDBF1">Login</h5>
         </div>
         <div class="modal-body">
+
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="email" id="form3Example3c" class="form-control" />
+              <input type="text" id="loginUsername" class="form-control" />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -137,7 +139,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="password" id="form3Example4c" class="form-control" />
+              <input type="password" id="loginPassword" class="form-control" />
               <label class="form-label" for="form3Example4c" style="color:#DDDBF1">Password</label>
             </div>
           </div>
@@ -145,13 +147,25 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" onclick="doLogin()" class="btn btn-primary">Login</button>
           </div>
+        </div>
       </form>
     </div>
   </div>
 </div>
 <script>
+
+  function doLogin() {
+    alert("login");
+
+    var loginInfo = {
+      username: $('#loginUsername').val(),
+      password: $('#loginPassword').val()
+    }
+
+    console.log(loginInfo);
+  }
 
   $.get("rest/user", function (data) {
     console.log(data);
@@ -162,12 +176,12 @@
   $("#register").on('click', function () {
 
     var user = {};
-    user.name = $('#name').val();
-    user.surname = $('#surname').val();
-    user.username = $('#username').val();
-    user.password = $('#password').val();
-    user.email = $('#email').val();
-    user.dateOfBirth = $('#dateOfBirth').val();
+    user.name = $('#registerName').val();
+    user.surname = $('#registerSurname').val();
+    user.username = $('#registerUsername').val();
+    user.password = $('#registerPassword').val();
+    user.email = $('#registerEmail').val();
+    user.dateOfBirth = $('#registerDateOfBirth').val();
 
     $.ajax({
       type: "POST",
