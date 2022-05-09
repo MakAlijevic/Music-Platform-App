@@ -21,7 +21,7 @@ class BaseDao{
 
     //method to read all objects from database table
     public function get_all(){
-        $stmt = $this->conn->prepare("SELECT * FROM".$this->table_name);
+        $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -44,7 +44,7 @@ class BaseDao{
 
     
     protected function add($entity){
-        $query = "INSERT INTO".$this->table_name." (";
+        $query = "INSERT INTO ".$this->table_name." (";
         foreach ($entity as $column => $value) {
           $query .= $column.", ";
         }

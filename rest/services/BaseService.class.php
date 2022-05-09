@@ -16,16 +16,16 @@ abstract class BaseService{
         return $this->dao->get_by_id($id);
     }
 
-    public function add($entity){
-        return $this->dao->add();
+    public function add_element($entity){
+        return $this->dao->add_element($entity);
     }
 
-    public function update($id, $entity){
-        return $this->dao->update($id, $entity);
+    public function update_element($id, $entity){
+        return $this->dao->update_element($id, $entity);
     }
 
-    public function delete($id){
-        return $this->dao->delete($id);
+    public function delete_element($id){
+        return $this->dao->delete_element($id);
     }
 }
 ?>
