@@ -1,0 +1,38 @@
+html,
+body {
+    height: auto;
+    background-color: black;
+}
+
+body {
+    position: relative;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Play', sans-serif;
+    color: white;
+}
+
+
+.cover-container {
+    max-width: 31.5em;
+}
+
+.cover {
+    padding: 200px 0;
+}
+
+.cover .btn-lg {
+    padding: .75rem 1.25rem;
+    font-weight: 700;
+}
+
+.modal-content {
+    background-color: #383F51;
+}
+
+img[alt~="profilePicture"] {
+    border: 2px solid white;
+}
+
+img[alt~="playlistPicture"] {
+    border: 2px solid white;
+}

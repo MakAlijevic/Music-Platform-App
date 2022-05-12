@@ -13,9 +13,10 @@ class BaseDao{
         $username = "root";
         $password = "root";
         $schema = "soundwave";
+        $port = "3307";
 
         //database connection - connection to database schema
-        $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
+        $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$schema", $username, $password);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

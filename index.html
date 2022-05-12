@@ -63,7 +63,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="name" type="text" id="registerName" class="form-control" required/>
+              <input name="name" type="text" id="registerName" class="form-control" required />
               <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="username" type="text" id="registerUsername" class="form-control" required/>
+              <input name="username" type="text" id="registerUsername" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -102,7 +102,8 @@
 
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <label>Date of Birth</label>
-            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth" required>
+            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth"
+              required>
           </div>
 
           <div class="modal-footer">
@@ -172,37 +173,34 @@
     console.log(data);
   });
 
-       $('#Register').validate({
-       submitHandler: function(form) {
-         var user = {};
-         user.name = $('#registerName').val();
-         user.surname = $('#registerSurname').val();
-         user.username = $('#registerUsername').val();
-         user.password = $('#registerPassword').val();
-         user.email = $('#registerEmail').val();
-         user.dateOfBirth = $('#registerDateOfBirth').val();
+  $('#Register').validate({
+    submitHandler: function (form) {
+      var user = {};
+      user.name = $('#registerName').val();
+      user.surname = $('#registerSurname').val();
+      user.username = $('#registerUsername').val();
+      user.password = $('#registerPassword').val();
+      user.email = $('#registerEmail').val();
+      user.dateOfBirth = $('#registerDateOfBirth').val();
 
-         $.ajax({
-           type: "POST",
-           url: ' rest/user',
-           data: JSON.stringify(user),
-           contentType: "application/json",
-           dataType: "json",
+      $.ajax({
+        type: "POST",
+        url: ' rest/user',
+        data: JSON.stringify(user),
+        contentType: "application/json",
+        dataType: "json",
 
-           success: function (data) {
-              $('#SignUpModal').modal('toggle');
+        success: function (data) {
+          $('#SignUpModal').modal('toggle');
 
-           },
-           error: function (xhr, ajaxOptions, thrownError) {
-             alert(thrownError);
-           }
-         });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(thrownError);
+        }
+      });
 
-       }
-     });
-
-
-
+    }
+  });
 </script>
 
 </html>
