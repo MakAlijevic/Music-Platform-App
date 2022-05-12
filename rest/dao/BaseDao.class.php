@@ -1,4 +1,5 @@
 <?php
+
 class BaseDao{
 
     private $conn;
@@ -12,10 +13,9 @@ class BaseDao{
         $username = "root";
         $password = "root";
         $schema = "soundwave";
-        $port = "3307";
-        
+
         //database connection - connection to database schema
-        $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$schema", $username, $password);
+        $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -26,7 +26,7 @@ class BaseDao{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //method to read element from database table 
+    //method to read element from database table
     public function get_by_id($id){
         $stmt = $this->conn->prepare("SELECT * FROM".$this->table_name."WHERE id=:id");
         $stmt->execute(['id' => $id]);
@@ -34,7 +34,7 @@ class BaseDao{
         return @reset($result);
     }
 
-    //method to delete objects from database table 
+    //method to delete objects from database table
     public function delete_element($id){
         $stmt = $this->conn->prepare("DELETE FROM user WHERE id=:id");
         //SQL Injection prevention
@@ -42,7 +42,7 @@ class BaseDao{
         $stmt->execute();
     }
 
-    
+
     protected function add($entity){
         $query = "INSERT INTO ".$this->table_name." (";
         foreach ($entity as $column => $value) {
@@ -55,14 +55,14 @@ class BaseDao{
         }
         $query = substr($query, 0, -2);
         $query .= ")";
-    
+
         $stmt= $this->conn->prepare($query);
         $stmt->execute($entity); // sql injection prevention
         $entity['id'] = $this->conn->lastInsertId();
         return $entity;
       }
 
-      
+
       protected function update($id, $entity, $id_column = "id"){
         $query = "UPDATE ".$this->table_name." SET ";
         foreach($entity as $name => $value){
@@ -70,7 +70,7 @@ class BaseDao{
         }
         $query = substr($query, 0, -2);
         $query .= " WHERE ${id_column} = :id";
-    
+
         $stmt= $this->conn->prepare($query);
         $entity['id'] = $id;
         $stmt->execute($entity);
@@ -82,20 +82,20 @@ class BaseDao{
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
-    
+
       //method for unique query with only 1 output
       protected function query_unique($query, $params){
         $results = $this->query($query, $params);
         return reset($results);
       }
 
-      
+
     //method to add object to database table
     public function add_element($entity){
         return $this->add($entity);
     }
 
-    //method to update objects from database table 
+    //method to update objects from database table
     public function update_element($id, $entity){
         $this->update($id, $entity);
     }

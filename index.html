@@ -47,14 +47,14 @@
 
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
-
+<script src="javaScript\jquery.validate.min.js"></script>
 
 <!-- Modal SignUp -->
 
 <div class="modal fade" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="mx-1 mx-md-4" method="post">
+      <form class="mx-1 mx-md-4" method="post" id="Register">
         <div class="modal-header ms-2">
           <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#DDDBF1">Sign up</h5>
         </div>
@@ -63,7 +63,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="name" type="text" id="registerName" class="form-control" />
+              <input name="name" type="text" id="registerName" class="form-control" required/>
               <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
             </div>
           </div>
@@ -71,7 +71,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="surname" type="text" id="registerSurname" class="form-control" />
+              <input name="surname" type="text" id="registerSurname" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input type="text" id="registerEmail" class="form-control" />
+              <input type="text" id="registerEmail" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="username" type="text" id="registerUsername" class="form-control" />
+              <input name="username" type="text" id="registerUsername" class="form-control" required/>
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
@@ -95,21 +95,21 @@
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
-              <input name="password " type="password" id="registerPassword" class="form-control" />
+              <input name="password " type="password" id="registerPassword" class="form-control" required />
               <label class="form-label" for="form3Example4c" style="color:#DDDBF1">Password</label>
             </div>
           </div>
 
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <label>Date of Birth</label>
-            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth">
+            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth" required>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button id="register" type="button" class="btn btn-primary">Register</button>
+            <button id="register" type="submit" class="btn btn-primary">Register</button>
           </div>
         </div>
       </form>
@@ -156,6 +156,7 @@
 </div>
 <script>
 
+
   function doLogin() {
     alert("login");
 
@@ -171,35 +172,36 @@
     console.log(data);
   });
 
+       $('#Register').validate({
+       submitHandler: function(form) {
+         var user = {};
+         user.name = $('#registerName').val();
+         user.surname = $('#registerSurname').val();
+         user.username = $('#registerUsername').val();
+         user.password = $('#registerPassword').val();
+         user.email = $('#registerEmail').val();
+         user.dateOfBirth = $('#registerDateOfBirth').val();
+
+         $.ajax({
+           type: "POST",
+           url: ' rest/user',
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           dataType: "json",
+
+           success: function (data) {
+              $('#SignUpModal').modal('toggle');
+
+           },
+           error: function (xhr, ajaxOptions, thrownError) {
+             alert(thrownError);
+           }
+         });
+
+       }
+     });
 
 
-  $("#register").on('click', function () {
-
-    var user = {};
-    user.name = $('#registerName').val();
-    user.surname = $('#registerSurname').val();
-    user.username = $('#registerUsername').val();
-    user.password = $('#registerPassword').val();
-    user.email = $('#registerEmail').val();
-    user.dateOfBirth = $('#registerDateOfBirth').val();
-
-    $.ajax({
-      type: "POST",
-      url: ' rest/user',
-      data: JSON.stringify(user),
-      contentType: "application/json",
-      dataType: "json",
-
-      success: function (data) {
-        if (data.d == "success") {
-          alert("Data saved successfully");
-        }
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        alert(thrownError);
-      }
-    });
-  });
 
 </script>
 
