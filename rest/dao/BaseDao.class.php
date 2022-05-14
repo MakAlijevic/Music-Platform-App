@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../Config.class.php';
 
 class BaseDao{
 
@@ -9,11 +10,11 @@ class BaseDao{
 
         //database table login
         $this -> table_name = $table_name;
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $schema = "soundwave";
-        $port = "3307";
+        $servername = Config::DB_HOST();
+        $username = Config::DB_USERNAME();
+        $password = Config::DB_PASSWORD();
+        $schema = Config::DB_SCHEMA();
+        $port = Config::DB_PORT();
 
         //database connection - connection to database schema
         $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$schema", $username, $password);

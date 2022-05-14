@@ -1,7 +1,32 @@
 <?php
+require_once __DIR__.'/../Config.class.php';
+  use Firebase\JWT\JWT;
+  use Firebase\JWT\Key;
 
-//list all users
-Flight::route('GET /user', function(){
+//verify login credentials
+Flight::route('POST /login', function(){
+
+$login = Flight::request()->data->getData();
+
+$user = Flight::userDao()->get_user_by_username($login['username']);
+
+if(isset($user['id'])){
+
+  if($user['password'] == $login['password']){
+    unset($user['password']);
+    $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
+    Flight::json(['token' => $jwt]);
+  }else{
+    Flight::json(["message"=>"Password is incorrect"], 404);
+  }
+}else{
+  Flight::json(["message"=>"User with that username doesn't exist"], 404);
+}
+
+});
+
+  //list all users
+  Flight::route('GET /user', function(){
     Flight::json(Flight::userService()->get_all());
   });
   
