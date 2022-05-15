@@ -50,6 +50,7 @@
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript\jquery.validate.min.js"></script>
 <script src="javaScript/toastr.min.js"></script>
+<script src="javaScript/UserService.js"></script>
 
 <!-- Modal SignUp -->
 
@@ -158,10 +159,6 @@
   </div>
 </div>
 <script>
-  $.get("rest/user", function (data) {
-    console.log(data);
-  });
-
   $('#registerForm').validate({
     submitHandler: function (form) {
       var user = {};
@@ -191,35 +188,7 @@
     }
   });
 
-  var token = localStorage.getItem("token");
-  if (token) {
-    window.location.replace("homepage.html");
-  }
-
-
-  $('#loginForm').validate({
-    submitHandler: function (form) {
-      var user = Object.fromEntries((new FormData(form)).entries());
-      $.ajax({
-        type: "POST",
-        url: ' rest/login',
-        data: JSON.stringify(user),
-        contentType: "application/json",
-        dataType: "json",
-
-        success: function (data) {
-          console.log(data);
-          localStorage.setItem("token", data.token);
-          window.location.replace("homepage.html");
-
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
-        }
-      });
-    }
-  });
-
+  UserService.init();
 
 </script>
 
