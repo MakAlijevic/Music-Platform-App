@@ -7,6 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Play&display=swap" rel="stylesheet">
+  <link href="css/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body class="text-center">
@@ -48,6 +49,7 @@
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript\jquery.validate.min.js"></script>
+<script src="javaScript/toastr.min.js"></script>
 
 <!-- Modal SignUp -->
 
@@ -189,6 +191,11 @@
     }
   });
 
+  var token = localStorage.getItem("token");
+  if (token) {
+    window.location.replace("homepage.html");
+  }
+
 
   $('#loginForm').validate({
     submitHandler: function (form) {
@@ -202,10 +209,12 @@
 
         success: function (data) {
           console.log(data);
+          localStorage.setItem("token", data.token);
+          window.location.replace("homepage.html");
 
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-          alert(thrownError);
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
         }
       });
     }
