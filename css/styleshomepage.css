@@ -13,6 +13,7 @@ body {
 .carousel-inner {
   padding: 1em;
 }
+
 .card {
   margin: 0 0.5em;
   box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
@@ -20,12 +21,13 @@ body {
   width: 80%;
   height: 250px;
 }
-.card-img
-{
+
+.card-img {
   max-width: 100%;
   height: 30em;
 
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   background-color: #e1e1e1;
@@ -35,12 +37,14 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
+
 @media (min-width: 768px) {
   .carousel-item {
     margin-right: 0;
     flex: 0 0 30%;
     display: block;
   }
+
   .carousel-inner {
     display: flex;
   }
