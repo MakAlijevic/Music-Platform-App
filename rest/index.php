@@ -33,8 +33,6 @@ Flight::route('/*', function(){
             return FALSE;
         }
     }
-
-    print_r($headers);
 });
 
 require_once __DIR__.'/routes/UserRoutes.php';
