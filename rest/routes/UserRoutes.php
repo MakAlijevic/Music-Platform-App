@@ -3,6 +3,18 @@ require_once __DIR__.'/../Config.class.php';
   use Firebase\JWT\JWT;
   use Firebase\JWT\Key;
 
+//user registration
+Flight::route('POST /register', function(){
+  $registerUser = Flight::request()->data->getData();
+  $storedUser = Flight::userDao()->get_user_by_username($registerUser['username']);
+
+  if(isset($storedUser['id'])){
+    Flight::json(["message"=>"User with that username already exists. Try different username."], 404);
+  }else{
+    Flight::json(Flight::userService()->add_element(Flight::request()->data->getData()));
+  }
+});
+
 //verify login credentials
 Flight::route('POST /login', function(){
 
@@ -22,9 +34,9 @@ if(isset($user['id'])){
 }else{
   Flight::json(["message"=>"User with that username doesn't exist"], 404);
 }
-
 });
 
+//CRUD operations for user
   //list all users
   Flight::route('GET /user', function(){
     Flight::json(Flight::userService()->get_all());
