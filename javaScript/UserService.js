@@ -71,5 +71,99 @@ var UserService = {
                 toastr.error(XMLHttpRequest.responseJSON.message);
             }
         });
+    },
+    getID: function () {
+        var result = "";
+        $.ajax({
+            type: "GET",
+            url: ' rest/id',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    },
+
+    getFirstName: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/firstname',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#profileFirstName').text(data);
+            }
+        });
+    },
+
+    getLastName: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/lastname',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#profileLastName').text(data);
+            }
+        });
+    },
+
+    getUsername: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/username',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#profileUsername').text(data);
+            }
+        });
+    },
+
+    getMainUsername: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/username',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#mainUsername').text(data);
+            }
+        });
+    },
+
+    getEmail: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/email',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#profileEmail').text(data);
+            }
+        });
+    },
+
+    getDateOfBirth: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/dob',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $('#profileDateOfBirth').text(data);
+                console.log(data);
+            }
+        });
     }
 }

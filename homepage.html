@@ -27,7 +27,7 @@
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
           data-bs-toggle="dropdown" aria-expanded="false">
           <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-          <span class="d-none d-sm-inline mx-3" id="usernamesmall" ></span>
+          <span class="d-none d-sm-inline mx-3" id="usernamesmall"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
           <li><a class="dropdown-item" href="profile.html">Profile</a></li>
@@ -572,19 +572,19 @@
 </script>
 <script>
 
-   $.ajax({
-   type:"GET",
-   url: ' rest/username',
-   beforeSend: function(xhr){
-         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-       },
-   success: function (data) {
-     $('#usernamesmall').text(data);
+  $.ajax({
+    type: "GET",
+    url: ' rest/username',
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+    },
+    success: function (data) {
+      $('#usernamesmall').text(data);
       $('#usernamelarge').text(data);
-   }
- });
+    }
+  });
 
 
-    </script>
+</script>
 
 </html>
