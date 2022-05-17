@@ -8,10 +8,35 @@ Flight::route('GET /username',function(){
   $validUser=Flight::get('validUser');
   $user=Flight::json($validUser['username']);
 });
+
 //get id
 Flight::route('GET /id',function(){
   $validUser=Flight::get('validUser');
   $user=Flight::json($validUser['id']);
+});
+
+//get firstname
+Flight::route('GET /firstname',function(){
+  $validUser=Flight::get('validUser');
+  $user=Flight::json($validUser['name']);
+});
+
+//get lastname
+Flight::route('GET /lastname',function(){
+  $validUser=Flight::get('validUser');
+  $user=Flight::json($validUser['surname']);
+});
+
+//get email
+Flight::route('GET /email',function(){
+  $validUser=Flight::get('validUser');
+  $user=Flight::json($validUser['email']);
+});
+
+//get date of birth
+Flight::route('GET /dob',function(){
+  $validUser=Flight::get('validUser');
+  $user=Flight::json($validUser['dateOfBirth']);
 });
 
 //user registration
