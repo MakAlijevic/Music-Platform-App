@@ -25,6 +25,7 @@ var UserService = {
                 UserService.register(user);
             }
         });
+
     },
     login: function (user) {
         $.ajax({

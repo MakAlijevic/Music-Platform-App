@@ -30,7 +30,7 @@ class BaseDao{
 
     //method to read element from database table
     public function get_by_id($id){
-        $stmt = $this->conn->prepare("SELECT * FROM".$this->table_name."WHERE id=:id");
+        $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id=:id");
         $stmt->execute(['id' => $id]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return @reset($result);
@@ -64,9 +64,8 @@ class BaseDao{
         return $entity;
       }
 
-
       protected function update($id, $entity, $id_column = "id"){
-        $query = "UPDATE ".$this->table_name." SET ";
+        $query = " UPDATE ".$this->table_name." SET ";
         foreach($entity as $name => $value){
           $query .= $name ."= :". $name. ", ";
         }

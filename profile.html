@@ -15,6 +15,11 @@
         <h1 class="text-center mt-5" style="font-size: 5rem; font-weight: 1000;">//username</h1>
     </div>
     <div class="container">
+      <div class="row">
+          <div class="col-4 mx-auto mt-3">
+              <button type="button" id="photobutton" class="btn btn-primary">Add profile photo</button>
+          </div>
+      </div>
         <div class="row">
             <div class="col-4 mx-auto mt-3">
                 <h5 class="text-center mt-5">First Name</h5>
@@ -114,5 +119,26 @@
 
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
+
+<script>
+
+function getID()
+{
+  var result="";
+     $.ajax({
+     type:"GET",
+     url: ' rest/id',
+    async: false,
+     beforeSend: function(xhr){
+           xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+         },
+     success: function (data) {
+       result=data;
+     }
+   });
+  return result;
+}
+
+</script>
 
 </html>
