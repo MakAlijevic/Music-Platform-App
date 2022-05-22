@@ -10,6 +10,78 @@ body {
   font-family: 'Play', sans-serif;
 }
 
+.img-container {
+  position: relative;
+  width: 110px;
+}
+
+.img-container img {
+  width: inherit;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 40px;
+  top: 5px;
+
+  animation: rotate 7s linear infinite;
+
+  animation-play-state: paused;
+}
+
+.footer.play .img-container img {
+  animation-play-state: running;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.img-container::after {
+  content: '';
+  background-color: rgb(26, 26, 26);
+  height: 23px;
+  width: 23px;
+  position: absolute;
+  left: 95px;
+  bottom: -82px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#music-container {
+  background-color: rgb(26, 26, 26);
+}
+
+.music-container {
+  display: flex;
+  justify-content: center;
+}
+
+.progress-container {
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  height: 5px;
+  width: 100%;
+}
+
+.progress {
+  background-color: rgb(75, 26, 85);
+  border-radius: 5px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+
 .carousel-inner {
   padding: 1em;
 }

@@ -7,6 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/styleshomepage.css" />
   <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Play&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
 </head>
 
 <header>
@@ -494,10 +495,44 @@
     </div>
   </div>
   </div>
-
-
-
-
+  <div class="footer py-2 fixed-bottom" style="height: 140px;" id="music-container">
+    <div class="img-container">
+      <img src="images/song1.jpg" alt="music-cover" id="cover" />
+    </div>
+    <div class="container fixed" style="width:500px;">
+      <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
+        <button class="btn btn-black rounded-circle me-3" style="background-color: #0f0f0f; color: white;" type="button"
+          id="prev">
+          <i class="fas fa-backward"></i>
+        </button>
+        <button class="btn btn-lg btn-black rounded-circle" style="background-color: rgb(58, 55, 55); color: white;"
+          type="button" id="play">
+          <i class="fas fa-play"></i>
+        </button>
+        <button class="btn btn-black rounded-circle ms-3" style="background-color: #0f0f0f; color: white;" type="button"
+          id="next">
+          <i class="fas fa-forward"></i>
+        </button>
+      </div>
+      <div class="container" style="width: 500px;">
+        <div class="progress-container" id="progress-container">
+          <div class="progress" id="progress">
+          </div>
+        </div>
+      </div>
+      <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
+        <div class="music-info">
+          <h6 id="artist" style="color: rgb(97, 97, 97);">artist</h6>
+        </div>
+      </div>
+      <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
+        <div class="music-info">
+          <h4 id="title">title</h4>
+        </div>
+      </div>
+    </div>
+    <audio src="music/song1" id="audio"></audio>
+  </div>
 </body>
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
@@ -571,7 +606,6 @@
   }
 </script>
 <script>
-
   $.ajax({
     type: "GET",
     url: ' rest/username',
@@ -583,8 +617,107 @@
       $('#usernamelarge').text(data);
     }
   });
-
-
 </script>
+<script>
+  const musicContainer = document.querySelector('.footer');
+  const playBtn = document.querySelector('#play');
+  const prevBtn = document.querySelector('#prev');
+  const nextBtn = document.querySelector('#next');
+  const audio = document.querySelector('#audio');
+  const progress = document.querySelector('.progress');
+  const progressContainer = document.querySelector('.progress-container');
+  const title = document.querySelector('#title');
+  const cover = document.querySelector('#cover');
+
+  //song titles
+  const songs = ['song1', 'song2', 'song3'];
+
+  //keep track of songs
+  let songIndex = 2;
+
+  //initially load song info
+  loadSong(songs[songIndex]);
+
+  //update song details
+  function loadSong(song) {
+    title.innerText = song;
+    audio.src = `music/${song}.mp3`;
+    cover.src = `images/${song}.jpg`
+  }
+
+  function playSong() {
+    musicContainer.classList.add('play');
+    playBtn.querySelector('i.fas').classList.remove('fa-play');
+    playBtn.querySelector('i.fas').classList.add('fa-pause');
+
+    audio.play();
+  }
+
+  function pauseSong() {
+    musicContainer.classList.remove('play');
+    playBtn.querySelector('i.fas').classList.add('fa-play');
+    playBtn.querySelector('i.fas').classList.remove('fa-pause');
+
+    audio.pause();
+  }
+
+  function prevSong() {
+    songIndex--;
+
+    if (songIndex < 0) {
+      songIndex = songs.length - 1;
+    }
+    loadSong(songs[songIndex]);
+
+    playSong();
+  }
+
+  function nextSong() {
+    songIndex++;
+
+    if (songIndex > songs.length - 1) {
+      songIndex = 0;
+    }
+    loadSong(songs[songIndex]);
+
+    playSong();
+  }
+
+  function updateProgress(e) {
+    const { duration, currentTime } = e.srcElement;
+    const progressPercent = (currentTime / duration) * 100;
+
+    progress.style.width = `${progressPercent}%`;
+  }
+
+  function setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audio.duration;
+
+    audio.currentTime = (clickX / width) * duration;
+  }
+
+  //event listeners
+  playBtn.addEventListener('click', () => {
+    const isPlaying = musicContainer.classList.contains('play');
+
+    if (isPlaying) {
+      pauseSong();
+    } else {
+      playSong();
+    }
+  });
+
+  prevBtn.addEventListener('click', prevSong);
+  nextBtn.addEventListener('click', nextSong);
+
+  audio.addEventListener('timeupdate', updateProgress);
+
+  progressContainer.addEventListener('click', setProgress);
+
+  audio.addEventListener('ended', nextSong);
+</script>
+
 
 </html>
