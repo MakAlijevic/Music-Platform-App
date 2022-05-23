@@ -495,35 +495,45 @@
     </div>
   </div>
   </div>
-  <div class="footer py-2 fixed-bottom" style="height: 140px;" id="music-container">
+  <div class="footer py-2 fixed-bottom" style="height: 118px;" id="music-container">
     <div class="img-container">
       <img src="images/song1.jpg" alt="music-cover" id="cover" />
     </div>
+    <div class="tone-container float-end" style="width:150px;">
+      <div class="row">
+        <button class="btn btn-lg btn-black rounded-circle shadow-none col-md-auto"
+          style="background-color: rgba(58, 55, 55, 0); color: white; padding-right: 30px !important;" type="button"
+          id="volume">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <div class="sound-container float-end col-lg" id="sound-container">
+          <div class="sound-progress" id="sound-progress">
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container fixed" style="width:500px;">
       <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
-        <button class="btn btn-black rounded-circle me-3" style="background-color: #0f0f0f; color: white;" type="button"
-          id="prev">
+        <button class="btn btn-black rounded-circle me-3 shadow-none" style="background-color: #0f0f0f; color: white;"
+          type="button" id="prev">
           <i class="fas fa-backward"></i>
         </button>
-        <button class="btn btn-lg btn-black rounded-circle" style="background-color: rgb(58, 55, 55); color: white;"
-          type="button" id="play">
+        <button class="btn btn-lg btn-black rounded-circle shadow-none"
+          style="background-color: rgb(58, 55, 55); color: white;" type="button" id="play">
           <i class="fas fa-play"></i>
         </button>
-        <button class="btn btn-black rounded-circle ms-3" style="background-color: #0f0f0f; color: white;" type="button"
-          id="next">
+        <button class="btn btn-black rounded-circle ms-3 shadow-none" style="background-color: #0f0f0f; color: white;"
+          type="button" id="next">
           <i class="fas fa-forward"></i>
         </button>
       </div>
-      <div class="container" style="width: 500px;">
+      <div class="container d-grid gap-2 d-md-flex justify-content-md-center" style="width: 500px;">
+        <h6 class="current-time" id="current-time">0:00</h6>
         <div class="progress-container" id="progress-container">
           <div class="progress" id="progress">
           </div>
         </div>
-      </div>
-      <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
-        <div class="music-info">
-          <h6 id="artist" style="color: rgb(97, 97, 97);">artist</h6>
-        </div>
+        <h6 class="total-time" id="total-time">0:00</h6>
       </div>
       <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
         <div class="music-info">
@@ -628,6 +638,11 @@
   const progressContainer = document.querySelector('.progress-container');
   const title = document.querySelector('#title');
   const cover = document.querySelector('#cover');
+  const timeCurrent = document.querySelector('#current-time');
+  const timeTotal = document.querySelector('#total-time');
+  const soundContainer = document.querySelector('.sound-container');
+  const volume = document.querySelector('.sound-progress');
+  const volumeBtn = document.querySelector('#volume');
 
   //song titles
   const songs = ['song1', 'song2', 'song3'];
@@ -642,7 +657,7 @@
   function loadSong(song) {
     title.innerText = song;
     audio.src = `music/${song}.mp3`;
-    cover.src = `images/${song}.jpg`
+    cover.src = `images/${song}.jpg`;
   }
 
   function playSong() {
@@ -683,6 +698,21 @@
     playSong();
   }
 
+  function seekTimeUpdate() {
+    var currentMins = Math.floor(audio.currentTime / 60);
+    var currentSecs = Math.floor(audio.currentTime - currentMins * 60);
+    var durationMins = Math.floor(audio.duration / 60);
+    var durationSecs = Math.floor(audio.duration - durationMins * 60);
+
+    if (currentSecs < 10) { currentSecs = "0" + currentSecs; }
+    if (durationSecs < 10) { durationSecs = "0" + durationSecs; }
+    if (currentMins < 10) { currentMins = "0" + currentMins; }
+    if (durationMins < 10) { durationMins = "0" + durationMins; }
+
+    timeCurrent.innerHTML = currentMins + ":" + currentSecs;
+    timeTotal.innerHTML = durationMins + ":" + durationSecs;
+  }
+
   function updateProgress(e) {
     const { duration, currentTime } = e.srcElement;
     const progressPercent = (currentTime / duration) * 100;
@@ -696,6 +726,42 @@
     const duration = audio.duration;
 
     audio.currentTime = (clickX / width) * duration;
+  }
+
+  function muteVolume() {
+    musicContainer.classList.add('muted');
+    volumeBtn.querySelector('i.fas').classList.remove('fa-volume-up');
+    volumeBtn.querySelector('i.fas').classList.add('fa-volume-mute');
+
+    audio.muted = true;
+  }
+
+  function unmuteVolume() {
+    musicContainer.classList.remove('muted');
+    volumeBtn.querySelector('i.fas').classList.remove('fa-volume-mute');
+    volumeBtn.querySelector('i.fas').classList.add('fa-volume-up');
+
+    audio.muted = false;
+  }
+
+  function setVolume(e) {
+    const clickX = e.offsetX;
+    if (clickX < 60) {
+      audio.volume = clickX / 100;
+      volumeBtn.querySelector('i.fas').classList.remove('fa-volume-up');
+      volumeBtn.querySelector('i.fas').classList.add('fa-volume-down');
+    } else {
+      audio.volume = clickX / 100;
+      volumeBtn.querySelector('i.fas').classList.remove('fa-volume-down');
+      volumeBtn.querySelector('i.fas').classList.add('fa-volume-up');
+    }
+  }
+
+  function updateVolume(e) {
+    const clickX = e.offsetX;
+    if (clickX <= 100) {
+      volume.style.width = `${clickX}%`;
+    }
   }
 
   //event listeners
@@ -716,7 +782,22 @@
 
   progressContainer.addEventListener('click', setProgress);
 
+  soundContainer.addEventListener('click', setVolume);
+  soundContainer.addEventListener('click', updateVolume);
+
+  audio.addEventListener('timeupdate', seekTimeUpdate);
+
   audio.addEventListener('ended', nextSong);
+
+  volumeBtn.addEventListener('click', () => {
+    const isMuted = musicContainer.classList.contains('muted');
+
+    if (isMuted) {
+      unmuteVolume();
+    } else {
+      muteVolume();
+    }
+  });
 </script>
 
 
