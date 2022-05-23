@@ -1,7 +1,7 @@
 html,
 body {
   height: auto;
-  background-color: #160c16;
+    background-image: linear-gradient(rgb(28, 10, 46), black);
 }
 
 body {
@@ -61,7 +61,7 @@ body {
 }
 
 #music-container {
-  background-image: linear-gradient(rgb(43, 0, 43), black);
+  background-image: linear-gradient(rgb(15, 8, 31),rgb(0, 0, 0));
 }
 
 .music-container {

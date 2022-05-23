@@ -14,9 +14,6 @@ class Config {
     public static function DB_SCHEMA(){
         return Config::get_env("DB_SCHEMA", "soundwave");
     }
-    public static function DB_PORT(){
-        return Config::get_env("DB_PORT", "3307");
-    }
     public static function JWT_SECRET(){
         return Config::get_env("JWT_SECRET", "ejia3s9JfG");
     }
