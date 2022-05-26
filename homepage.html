@@ -179,6 +179,78 @@
           </button>
         </div>
 
+
+        <h4 class="ms-5 mt-5">Explore new music</h4>
+
+
+
+        <div id="carousel3" class="carousel" style="width:100%; height: 300px;  margin:0 auto;" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carousel-populate3">
+            <div class="carousel-item active" id="3-carousel-item-1">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-2">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-3">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-4">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-5">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-6">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-7">
+            </div>
+            <div class="carousel-item" id="3-carousel-item-8">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+
+        <h4 class="ms-5 mt-5">Mood</h4>
+
+
+
+        <div id="carousel4" class="carousel" style="width:100%; height: 300px;  margin:0 auto;" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carousel-populate4">
+            <div class="carousel-item active" id="4-carousel-item-1">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-2">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-3">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-4">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-5">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-6">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-7">
+            </div>
+            <div class="carousel-item" id="4-carousel-item-8">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -274,8 +346,6 @@
   } else {
     $(multipleCardCarousel).addClass("slide");
   }
-</script>
-<script>
 
   var multipleCardCarousel2 = document.querySelector(
     "#carousel2"
@@ -300,6 +370,70 @@
       if (scrollPosition > 0) {
         scrollPosition -= cardWidth;
         $("#carousel2 .carousel-inner").animate(
+          { scrollLeft: scrollPosition },
+          600
+        );
+      }
+    });
+  } else {
+    $(multipleCardCarousel).addClass("slide");
+  }
+
+  var multipleCardCarousel3 = document.querySelector(
+    "#carousel3"
+  );
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+      interval: false,
+    });
+    var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+    var cardWidth = $(".carousel-item").width();
+    var scrollPosition = 0;
+    $("#carousel3 .carousel-control-next").on("click", function () {
+      if (scrollPosition < carouselWidth - cardWidth * 4) {
+        scrollPosition += cardWidth;
+        $("#carousel3 .carousel-inner").animate(
+          { scrollLeft: scrollPosition },
+          600
+        );
+      }
+    });
+    $("#carousel3 .carousel-control-prev").on("click", function () {
+      if (scrollPosition > 0) {
+        scrollPosition -= cardWidth;
+        $("#carousel3 .carousel-inner").animate(
+          { scrollLeft: scrollPosition },
+          600
+        );
+      }
+    });
+  } else {
+    $(multipleCardCarousel).addClass("slide");
+  }
+
+  var multipleCardCarousel4 = document.querySelector(
+    "#carousel4"
+  );
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+      interval: false,
+    });
+    var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+    var cardWidth = $(".carousel-item").width();
+    var scrollPosition = 0;
+    $("#carousel4 .carousel-control-next").on("click", function () {
+      if (scrollPosition < carouselWidth - cardWidth * 4) {
+        scrollPosition += cardWidth;
+        $("#carousel4 .carousel-inner").animate(
+          { scrollLeft: scrollPosition },
+          600
+        );
+      }
+    });
+    $("#carousel4 .carousel-control-prev").on("click", function () {
+      if (scrollPosition > 0) {
+        scrollPosition -= cardWidth;
+        $("#carousel4 .carousel-inner").animate(
           { scrollLeft: scrollPosition },
           600
         );
@@ -522,6 +656,8 @@
             </div>`;
           $("#1-carousel-item-" + (i + 1)).html(html);
           $("#2-carousel-item-" + (i - 8)).html(html);
+          $("#3-carousel-item-" + (i - 16)).html(html);
+          $("#4-carousel-item-" + (i - 24)).html(html);
         }
       }
     });
