@@ -39,6 +39,12 @@ Flight::route('GET /dob',function(){
   $user=Flight::json($validUser['dateOfBirth']);
 });
 
+//get photo
+Flight::route('GET /photo',function(){
+  $validUser=Flight::get('validUser');
+  $user=Flight::json($validUser['photo']);
+});
+
 //user registration
 Flight::route('POST /register', function(){
   $registerUser = Flight::request()->data->getData();
