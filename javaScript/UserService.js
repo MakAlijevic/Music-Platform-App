@@ -22,6 +22,7 @@ var UserService = {
                 user.password = $('#registerPassword').val();
                 user.email = $('#registerEmail').val();
                 user.dateOfBirth = $('#registerDateOfBirth').val();
+                user.photo=$('#photo').val();
                 UserService.register(user);
             }
         });
@@ -165,5 +166,51 @@ var UserService = {
                 console.log(data);
             }
         });
+    },
+    getPhoto: function() {
+
+      if(localStorage.hasOwnProperty('profilePicture'))
+      {
+        document.getElementById('profilepicture').src =localStorage.getItem('profilePicture');
+
+      }
+      else {
+        $.ajax({
+            url: ' rest/photo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (result) {
+                document.getElementById('profilepicture').src = result;
+
+
+            }
+        });
+      }
+
+    },
+    getPhotoHomepage: function() {
+      if(localStorage.hasOwnProperty('profilePicture'))
+      {
+
+        document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
+        document.getElementById('bigphoto').src = localStorage.getItem('profilePicture');
+      }
+      else {
+        $.ajax({
+            url: ' rest/photo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (result) {
+              document.getElementById('smallphoto').src = result;
+              document.getElementById('bigphoto').src = result;
+            }
+        });
+      }
+
     }
+
 }

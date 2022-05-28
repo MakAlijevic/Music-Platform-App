@@ -27,7 +27,7 @@
       <div class="dropdown pt-3 pe-5">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
           data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="images/male1.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+          <img src="" alt="" width="30" height="30" class="rounded-circle" id="smallphoto">
           <span class="d-none d-sm-inline mx-3" id="usernamesmall"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -53,7 +53,7 @@
           <div class="dropdown pb-4 pt-4">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="images/male1.jpg" alt="hugenerd" width="60" height="60" class="rounded-circle">
+              <img src="" alt="" width="60" height="60" class="rounded-circle" id="bigphoto">
               <span class="d-none d-sm-inline mx-3" id="usernamelarge">Username</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -309,6 +309,10 @@
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript/UserService.js"></script>
+
+<script>
+  UserService.getPhotoHomepage();
+</script>
 
 <script>
   var multipleCardCarousel = document.querySelector(

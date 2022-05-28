@@ -105,4 +105,5 @@ if(isset($user['id'])){
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->update_element($id, $data));
   });
+
 ?>
