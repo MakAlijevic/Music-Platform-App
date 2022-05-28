@@ -22,7 +22,7 @@ Flight::register('songService', 'SongService');
 //middleware login method
 Flight::route('/*', function(){
     $path = Flight::request()->url;
-    if($path == '/login' || $path == '/register' ){
+    if($path == '/login' || $path == '/register'){
         return TRUE;
     }
     $headers = getallheaders();
