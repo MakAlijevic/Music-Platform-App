@@ -255,7 +255,7 @@
     </div>
   </div>
   </div>
-  <div id="bottomPlayer">
+  <div id="bottomPlayer" style="display: none;">
     <div class="footer py-2 fixed-bottom" style="height: 118px;" id="music-container">
       <div class="img-container">
         <img src="images/song1.jpg" alt="music-cover" id="cover" />
@@ -478,7 +478,7 @@
   const volumeBtn = document.querySelector('#volume');
 
   //song titles
-  const songs = ['Charlie Puth - Light Switch', "Charlie Puth - We Don't Talk Anymore", 'Coldplay X BTS - My Universe', 'Dove Cameron - Boyfriend',];
+  const songs = [];
 
   //keep track of songs
   let songIndex = 2;
@@ -510,6 +510,7 @@
   }
 
   function prevSong() {
+    const isPlaying = musicContainer.classList.contains('play');
     songIndex--;
 
     if (songIndex < 0) {
@@ -517,10 +518,15 @@
     }
     loadSong(songs[songIndex]);
 
-    playSong();
+    if (isPlaying) {
+      playSong();
+    } else {
+      pauseSong();
+    }
   }
 
   function nextSong() {
+    const isPlaying = musicContainer.classList.contains('play');
     songIndex++;
 
     if (songIndex > songs.length - 1) {
@@ -528,7 +534,11 @@
     }
     loadSong(songs[songIndex]);
 
-    playSong();
+    if (isPlaying) {
+      playSong();
+    } else {
+      pauseSong();
+    }
   }
 
   function seekTimeUpdate() {
@@ -642,13 +652,14 @@
       },
       success: function (data) {
         for (let i = 0; i < data.length; i++) {
+          songs.push(data[i].title);
           var html = "";
           html += `<div class="card bg-dark text-white">
                 <img class="card-img" src="`+ data[i].cover + `.jpg" alt="Card image" style="opacity:0.8;">
                 <div class="card-img-overlay">
                   <h5 class="card-title mt-5" style="text-align: center">`+ data[i].title + `</h5>
                   <div class="form-group" style="text-align: center">
-                    <button type="button" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm shadow-none" onClick="getRandomSong(`+ i + `)">
                       <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="white" class="bi bi-play"
                         viewBox="0 0 16 16">
                         <path
@@ -668,6 +679,14 @@
   }
 
   getSongs();
+
+  function getRandomSong(id) {
+    const player = document.querySelector('#bottomPlayer');
+    player.style.display = `flex`;
+    songIndex = id;
+    loadSong(songs[songIndex]);
+    playSong();
+  }
 </script>
 
 
