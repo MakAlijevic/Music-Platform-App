@@ -1,0 +1,22 @@
+
+h1
+{
+  font-size: 65px;
+}
+
+.float-container {
+    border: 3px;
+    padding: 20px;
+}
+
+.float-child {
+    width: 45%;
+    float: left;
+    padding: 20px;
+    border: 2px;
+}
+
+p
+{
+  font-size:20px;
+}

@@ -161,3 +161,7 @@ body {
     display: flex;
   }
 }
+
+footer{
+  background-color: linear-gradient(rgb(28, 10, 46), black);
+}
