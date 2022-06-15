@@ -103,28 +103,25 @@
       </div>
       <div class="col py-5 ms-5">
 
-        <div class="float-container pt-3 mt-5">
+        <div class="float-container pe-5 pt-3 mt-5">
   <div class="float-child ms-1">
-    <div class="ms-5 ps-5 pt-5">
-      <h1 class="ms-5 pt-2">About Us</h1>
-    </div>
-    <div class="mt-5 pt-5"style="max-width:550px; word-wrap:break-word;">
-            <p class="text-center">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-          </div>
+  <h1>Playlist name</h1>
   </div>
 
-  <div class="float-child mt-0">
-      <img src="images/aboutUs.png" alt="" class="rounded-circle" id="aboutus" width="570" height="500">
+  <div class="float-child mt-0 ps-0">
+    <button class="btn btn-lg btn-black rounded-circle shadow-none"
+      style="background-color: rgb(58, 55, 55); color: white; height:80px; width:80px;" type="button" id="playbutton">
+      <i class="fas fa-play"></i>
+    </button>
   </div>
 
 </div>
-</div>
+        </div>
+      </body>
+        <script src="javaScript/jquery-3.6.0.min.js"></script>
+        <script src="javaScript\bootstrap.bundle.min.js"></script>
+        <script src="javaScript/UserService.js"></script>
 
-    </body>
-      <script src="javaScript/jquery-3.6.0.min.js"></script>
-      <script src="javaScript\bootstrap.bundle.min.js"></script>
-      <script src="javaScript/UserService.js"></script>
-
-      <script>
-        UserService.getPhotoHomepage();
-      </script>
+        <script>
+          UserService.getPhotoHomepage();
+        </script>

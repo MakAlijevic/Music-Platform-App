@@ -11,6 +11,9 @@ body {
     color: white;
 }
 
+.modal-content {
+  background-color: rgb(28, 10, 46);
+}
 
 .cover-container {
     max-width: 31.5em;
@@ -25,9 +28,6 @@ body {
     font-weight: 700;
 }
 
-.modal-content {
-    background-color: #383F51;
-}
 
 img[alt~="profilePicture"] {
     border: 2px solid white;

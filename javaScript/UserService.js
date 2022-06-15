@@ -90,6 +90,22 @@ var UserService = {
     },
 
     getFirstName: function () {
+      if(localStorage.hasOwnProperty('name'))
+      {
+           $("#profileFirstName").text(localStorage.getItem("name"));
+           $.ajax({
+               type: "GET",
+               url: ' rest/firstname',
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+               },
+               success: function (data) {
+                   $('#editFirstName').val(data);
+               }
+           });
+
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/firstname',
@@ -98,11 +114,29 @@ var UserService = {
             },
             success: function (data) {
                 $('#profileFirstName').text(data);
+                $('#editFirstName').val(data);
             }
         });
+    }
     },
 
     getLastName: function () {
+      if(localStorage.hasOwnProperty('surname'))
+      {
+           $("#profileLastName").text(localStorage.getItem("surname"));
+           $.ajax({
+               type: "GET",
+               url: ' rest/lastname',
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+               },
+               success: function (data) {
+                   $('#editLastName').val(data);
+               }
+           });
+
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/lastname',
@@ -111,11 +145,28 @@ var UserService = {
             },
             success: function (data) {
                 $('#profileLastName').text(data);
+                $('#editLastName').val(data);
             }
         });
+    }
     },
 
     getUsername: function () {
+      if(localStorage.hasOwnProperty('username'))
+      {
+           $("#profileUsername").text(localStorage.getItem("username"));
+           $.ajax({
+               type: "GET",
+               url: ' rest/username',
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+               },
+               success: function (data) {
+                   $('#editUsername').val(data);
+               }
+           });
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/username',
@@ -124,11 +175,20 @@ var UserService = {
             },
             success: function (data) {
                 $('#profileUsername').text(data);
+                $('#editUsername').val(data);
+
             }
         });
+    }
     },
 
     getMainUsername: function () {
+      if(localStorage.hasOwnProperty('username'))
+      {
+           $("#profileUsername").text(localStorage.getItem("username"));
+
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/username',
@@ -139,9 +199,26 @@ var UserService = {
                 $('#mainUsername').text(data);
             }
         });
+    }
     },
 
     getEmail: function () {
+      if(localStorage.hasOwnProperty('email'))
+      {
+           $("#profileEmail").text(localStorage.getItem("email"));
+           $.ajax({
+               type: "GET",
+               url: ' rest/email',
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+               },
+               success: function (data) {
+                   $('#editEmail').val(data);
+               }
+           });
+
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/email',
@@ -150,11 +227,30 @@ var UserService = {
             },
             success: function (data) {
                 $('#profileEmail').text(data);
+                $('#editEmail').val(data);
             }
         });
+    }
     },
 
     getDateOfBirth: function () {
+      if(localStorage.hasOwnProperty('dateOfBirth'))
+      {
+           $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
+           $.ajax({
+               type: "GET",
+               url: ' rest/dob',
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+               },
+               success: function (data) {
+                   $('#profileDateOfBirth').text(data);
+                   $('#editDateOfBirth').val(data);
+               }
+           });
+
+      }
+      else {
         $.ajax({
             type: "GET",
             url: ' rest/dob',
@@ -163,15 +259,17 @@ var UserService = {
             },
             success: function (data) {
                 $('#profileDateOfBirth').text(data);
-                console.log(data);
+                $('#editDateOfBirth').val(data);
             }
         });
+    }
     },
     getPhoto: function() {
 
       if(localStorage.hasOwnProperty('profilePicture'))
       {
         document.getElementById('profilepicture').src =localStorage.getItem('profilePicture');
+        document.getElementById('profilepictureedit').src =localStorage.getItem('profilePicture');
 
       }
       else {
@@ -183,6 +281,7 @@ var UserService = {
             },
             success: function (result) {
                 document.getElementById('profilepicture').src = result;
+                document.getElementById('profilepictureedit').src =result;
 
 
             }

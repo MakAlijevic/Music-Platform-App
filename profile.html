@@ -5,16 +5,52 @@
     <meta charset="utf-8" />
     <title>SoundWave</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/profile.css?v=1" />
+    <link rel="stylesheet" href="css/profile.css" />
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Play&display=swap" rel="stylesheet">
 </head>
 
+<header>
+  <nav class="navbar navbar-dark bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand ms-5" href="homepage.html" style="font-size: 1.5rem;">SoundWave</a>
+
+
+      <form class="d-flex">
+        <div class="position-relative w-100 mt-3">
+          <input class="form-control border-0 rounded-pill w-200 ps-4 pe-5" type="text"
+            placeholder="Search for a song..."
+            style="height: 40px; width: 700px; background-color:#282828;color:white ">
+        </div>
+      </form>
+
+      <div class="dropdown pt-3 pe-5">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="" alt="" width="30" height="30" class="rounded-circle" id="smallphoto">
+          <span class="d-none d-sm-inline mx-3" id="usernamesmall"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#" onClick="UserService.logout()">Sign out</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+
 <body>
+
     <img class="rounded-circle mx-auto mt-5 d-block" id="profilepicture" width="250" height="250" src=""
         alt="profilePicture">
-    <div class="text-center">
-        <button type="button" id="buttonphoto" class="btn btn-default btn-lg h-500 center-v center-h"
-            data-bs-toggle="modal" data-bs-target="#myModal" style="color:white;">Choose Avatar</button>
+
+
+    <div class="pt-3"style="text-align:center">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#EditProfileModal">Edit profile</button>
     </div>
 
 
@@ -24,17 +60,12 @@
     </div>
     <div class="container">
 
-        <div class="row justify-content-md-center">
-            <div class="col-4 md-auto mt-1 ms-5 fixed">
+        <div class="row">
+            <div class="col-4 mx-auto mt-3">
                 <h5 class="text-center mt-4 border-bottom">First Name</h5>
                 <h5 class="text-center mt-2" id="profileFirstName" style="color:grey">First Name</h5>
             </div>
-            <div class="col-4 md-auto mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg"  width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" >
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg>
-            </div>
+
             </div>
         <div class="row">
             <div class="col-4 mx-auto mt-3">
@@ -121,7 +152,7 @@
     </div>
 
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="AvatarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,22 +164,22 @@
                 <div class="modal-body">
                     <input type="image" id="photo1" src="avatars/female1.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
                     <input type="image" id="photo2" src="avatars/female2.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
                     <input type="image" id="photo3" src="avatars/female3.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
                     <input type="image" id="photo4" src="avatars/male1.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
                     <input type="image" id="photo5" src="avatars/male2.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
                     <input type="image" id="photo6" src="avatars/male3.jpg" height="200" width="230"
                         style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
-                        onclick="addPhoto(id)">
+                        onclick="chooseAvatar(id)">
 
                 </div>
             </div>
@@ -156,9 +187,79 @@
     </div>
 </body>
 
+<div class="modal fade" id="EditProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form class="mx-1 mx-md-4" method="post" id="registerForm">
+        <div class="modal-header ms-2">
+          <h5 class="modal-title w-100" id="exampleModalLabel" style="color:#DDDBF1;text-align:center;">Edit profile</h5>
+        </div>
+        <div class="modal-body">
+
+          <img class="rounded-circle mx-auto mt-5 d-block" id="profilepictureedit" width="250" height="250" src=""
+              alt="profilePicture">
+              <div class="text-center">
+                  <button type="button" id="buttonphoto" class="btn btn-default btn-lg h-500 center-v center-h"
+                      data-bs-toggle="modal" data-bs-target="#AvatarModal" style="color:white;">Change Avatar</button>
+              </div>
+
+          <div class="d-flex flex-row align-items-center mb-4 pt-3">
+            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input name="name" type="text" id="editFirstName"  class="form-control" required />
+              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input name="surname" type="text" id="editLastName" class="form-control" required />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input type="text" id="editEmail" class="form-control" required />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input name="username" type="text" id="editUsername" class="form-control" required />
+              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
+            </div>
+          </div>
+
+          <div class="form-group" style="color:#DDDBF1; padding: 20px;">
+            <label>Date of Birth</label>
+            <input name="dob" type="date" id="editDateOfBirth" class="form-control" placeholder="Date of Birth"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button id="save" type="button" class="btn btn-primary" onclick="editProfile()">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript/UserService.js"></script>
+<script>
+  UserService.getPhotoHomepage();
+</script>
+
 <script>
     UserService.getMainUsername();
     UserService.getFirstName();
@@ -168,35 +269,58 @@
     UserService.getDateOfBirth();
     UserService.getPhoto();
 
-    function addPhoto(id) {
-        var dbdata = {};
-        var photoid = document.getElementById(id);
-        var url = photoid.getAttribute("src");
-        var id = UserService.getID();
-        dbdata.photo = url;
+</script>
 
+<script>
 
-        $.ajax({
-            url: ' rest/user/' + id,
-            type: 'PUT',
-            data: JSON.stringify(dbdata),
-            contentType: "application/json",
-            dataType: "json",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (result) {
-                $("#myModal").modal('hide');
+function chooseAvatar(id)
+{
+  var photoid = document.getElementById(id);
+  var url = photoid.getAttribute("src");
+  $('#AvatarModal').modal("hide");
+  $('#EditProfileModal').modal("show");
+ $('#profilepictureedit').attr('src',url);
+}
 
-                localStorage.setItem("profilePicture",url);
-                document.getElementById('profilepicture').src = localStorage.getItem("profilePicture");
+function editProfile()
+{
+  var editUser = {};
+  editUser.name = $('#editFirstName').val();
+  editUser.surname = $('#editLastName').val();
+  editUser.username = $('#editUsername').val();
+  editUser.email = $('#editEmail').val();
+  editUser.dateOfBirth = $('#editDateOfBirth').val();
+  editUser.photo=$('#profilepictureedit').attr('src');
+  var id = UserService.getID();
 
-            }
-        });
+  $.ajax({
+      url: ' rest/user/' + id,
+      type: 'PUT',
+      data: JSON.stringify(editUser),
+      contentType: "application/json",
+      dataType: "json",
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (result) {
 
-    }
+          localStorage.setItem("profilePicture",editUser.photo);
+          localStorage.setItem("name",editUser.name);
+          localStorage.setItem("surname",editUser.surname);
+          localStorage.setItem("username",editUser.username);
+          localStorage.setItem("email",editUser.email);
+          localStorage.setItem("dateOfBirth",editUser.dateOfBirth);
+           $('#profilepictureedit').attr('src',localStorage.getItem("profilePicture"));
+           $("#profileFirstName").text(localStorage.getItem("name"));
+           $("#profileLastName").text(localStorage.getItem("surname"));
+           $("#profileUsername").text(localStorage.getItem("username"));
+           $("#profileEmail").text(localStorage.getItem("email"));
+           $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
 
-
+           $("#EditProfileModal").modal('hide');
+      }
+  });
+}
 
 </script>
 
