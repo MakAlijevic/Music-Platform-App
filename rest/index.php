@@ -11,12 +11,16 @@ require_once __DIR__.'/services/UserService.class.php';
 require_once __DIR__.'/dao/UserDao.class.php';
 require_once __DIR__.'/services/SongService.class.php';
 require_once __DIR__.'/dao/SongDao.class.php';
-
+require_once __DIR__.'/services/PlaylistService.class.php';
+require_once __DIR__.'/dao/SongDao.class.php';
 
 Flight::register('userDao','UserDao');
 Flight::register('userService', 'UserService');
 Flight::register('songDao','SongDao');
 Flight::register('songService', 'SongService');
+Flight::register('playlistDao','PlaylistDao');
+Flight::register('playlistService', 'PlaylistService');
+
 
 
 //middleware login method
@@ -43,6 +47,7 @@ Flight::route('/*', function(){
 
 require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/SongRoutes.php';
+require_once __DIR__.'/routes/PlaylistRoutes.php';
 
 Flight::start();
 ?>

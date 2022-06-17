@@ -105,7 +105,7 @@
 
         <div class="float-container pe-5 pt-3 mt-5">
   <div class="float-child ms-1">
-  <h1>Playlist name</h1>
+  <h1 id="playlistname"></h1>
   </div>
 
   <div class="float-child mt-0 ps-0">
@@ -124,4 +124,26 @@
 
         <script>
           UserService.getPhotoHomepage();
+
+          function getPlaylists(){
+
+              $.ajax({
+                  type: "GET",
+                  url: ' rest/playlists',
+                  beforeSend: function (xhr) {
+                      xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                  },
+                  success: function (data) {
+                    for(let i=0;i<data.length;i++)
+                    {
+                       $('#playlistname').text(data[i].name);
+                    }
+
+
+                  }
+              });
+          }
+
+          getPlaylists();
+
         </script>

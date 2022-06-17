@@ -76,18 +76,7 @@
                 <i class="fs-5 bi-grid"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">My
                   Playlists</span> </a>
               <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                <li class="w-100">
-                  <a href="playlists.html" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">Playlist1</span></a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">Playlist2</span></a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">Product</span></a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">Product</span></a>
-                </li>
+
               </ul>
             </li>
             <li>
@@ -732,6 +721,37 @@
     loadSong(songs[songIndex]);
     playSong();
   }
+  
+  function getPlaylists(){
+
+      $.ajax({
+          type: "GET",
+          url: ' rest/playlists',
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function (data) {
+            $("#submenu3").html("");
+            var html = "";
+            for(let i = 0; i < data.length; i++){
+            html += `
+
+              <li class="w-100">
+                <a href="playlists.html" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">`+data[i].name+`</span></a>
+              </li>
+
+            `;
+
+          }
+          $("#submenu3").html(html);
+        }
+      });
+  }
+  getPlaylists();
+
+
+
+
 </script>
 
 
