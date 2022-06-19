@@ -3,10 +3,12 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SoundWave</title>
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/aboutUs.css" />
-    <link rel="stylesheet" href="css/styleshomepage.css" />
+  <link rel="stylesheet" href="css/styleshomepage.css" />
   <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Play&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
 </head>
@@ -78,7 +80,7 @@
                   Playlists</span> </a>
               <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                 <li class="w-100">
-                  <a href="#" class="nav-link px-0" > <span class="d-none d-sm-inline">Playlist1</span> 1</a>
+                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Playlist1</span> 1</a>
                 </li>
                 <li>
                   <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Playlist2</span> 2</a>
@@ -104,46 +106,46 @@
       <div class="col py-5 ms-5">
 
         <div class="float-container pe-5 pt-3 mt-5">
-  <div class="float-child ms-1">
-  <h1 id="playlistname"></h1>
-  </div>
+          <div class="float-child ms-1">
+            <h1 id="playlistname"></h1>
+          </div>
 
-  <div class="float-child mt-0 ps-0">
-    <button class="btn btn-lg btn-black rounded-circle shadow-none"
-      style="background-color: rgb(58, 55, 55); color: white; height:80px; width:80px;" type="button" id="playbutton">
-      <i class="fas fa-play"></i>
-    </button>
-  </div>
+          <div class="float-child mt-0 ps-0">
+            <button class="btn btn-lg btn-black rounded-circle shadow-none"
+              style="background-color: rgb(58, 55, 55); color: white; height:80px; width:80px;" type="button"
+              id="playbutton">
+              <i class="fas fa-play"></i>
+            </button>
+          </div>
 
-</div>
         </div>
-      </body>
-        <script src="javaScript/jquery-3.6.0.min.js"></script>
-        <script src="javaScript\bootstrap.bundle.min.js"></script>
-        <script src="javaScript/UserService.js"></script>
+      </div>
+</body>
+<script src="javaScript/jquery-3.6.0.min.js"></script>
+<script src="javaScript\bootstrap.bundle.min.js"></script>
+<script src="javaScript/UserService.js"></script>
 
-        <script>
-          UserService.getPhotoHomepage();
+<script>
+  UserService.getPhotoHomepage();
 
-          function getPlaylists(){
+  function getPlaylists() {
 
-              $.ajax({
-                  type: "GET",
-                  url: ' rest/playlists',
-                  beforeSend: function (xhr) {
-                      xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                  },
-                  success: function (data) {
-                    for(let i=0;i<data.length;i++)
-                    {
-                       $('#playlistname').text(data[i].name);
-                    }
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlists',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          $('#playlistname').text(data[i].name);
+        }
 
 
-                  }
-              });
-          }
+      }
+    });
+  }
 
-          getPlaylists();
+  getPlaylists();
 
-        </script>
+</script>
