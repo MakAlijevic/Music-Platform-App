@@ -13,6 +13,9 @@ require_once __DIR__.'/services/SongService.class.php';
 require_once __DIR__.'/dao/SongDao.class.php';
 require_once __DIR__.'/services/PlaylistService.class.php';
 require_once __DIR__.'/dao/SongDao.class.php';
+require_once __DIR__.'/services/PlaylistSongsService.class.php';
+require_once __DIR__.'/dao/PlaylistSongsDao.class.php';
+
 
 Flight::register('userDao','UserDao');
 Flight::register('userService', 'UserService');
@@ -20,6 +23,8 @@ Flight::register('songDao','SongDao');
 Flight::register('songService', 'SongService');
 Flight::register('playlistDao','PlaylistDao');
 Flight::register('playlistService', 'PlaylistService');
+Flight::register('playlistSongsDao','PlaylistSongsDao');
+Flight::register('playlistSongsService', 'PlaylistSongsService');
 
 
 
@@ -48,6 +53,7 @@ Flight::route('/*', function(){
 require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/SongRoutes.php';
 require_once __DIR__.'/routes/PlaylistRoutes.php';
+require_once __DIR__.'/routes/PlaylistSongsRoutes.php';
 
 Flight::start();
 ?>

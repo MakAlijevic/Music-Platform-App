@@ -673,6 +673,7 @@
   });
 </script>
 <script>
+
   function getSongs() {
     $.ajax({
       type: "GET",
@@ -733,9 +734,8 @@
           html += `
 
               <li class="w-100">
-                <a href="playlists.html" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">`+ data[i].name + `</span></a>
+                <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="getPlaylistID(`+data[i].id+`)"">`+data[i].name+`</span></button>
               </li>
-
             `;
 
         }
@@ -744,8 +744,7 @@
     });
   }
   getPlaylists();
-</script>
-<script>
+
   //prevents form from reloading page
   $("#searchBar").keypress(function (e) {
     if (e.which == 13)
@@ -767,6 +766,14 @@
       });
     }
   });
+
+
+  function getPlaylistID(id)
+  {
+      localStorage.setItem("playlistID", id);
+      window.location.replace("playlists.html");
+  }
+
 </script>
 
 
