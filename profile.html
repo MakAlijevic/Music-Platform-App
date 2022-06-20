@@ -94,62 +94,11 @@
         </div>
     </div>
 
+      <h2 class="text-center mt-5" style="font-size: 3rem; font-weight: 1000;">My playlists</h2>
+
   <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
-      <div class="col mt-3">
-        <h5 class="text-center mt-5">//playlistName</h5>
-        <a href="#">
-          <img src="111480.jpg" class="img-fluid" alt="playlistPicture">
-        </a>
-      </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" id="playlists">
+
     </div>
   </div>
 
@@ -237,6 +186,11 @@
             <input name="dob" type="date" id="editDateOfBirth" class="form-control" placeholder="Date of Birth"
               required>
           </div>
+          <div class="form-group" style="color:#DDDBF1; padding: 20px; align:center;">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Delete Profile
+            </button>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
@@ -318,5 +272,63 @@
   }
 
 </script>
+<script>
+
+  function getPlaylists() {
+
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlists',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        $("#playlists").html("");
+        var html = "";
+        for (let i = 0; i < data.length; i++) {
+          html += `
+          <div class="col mt-3">
+            <h4 class="text-center mt-5">`+data[i].name+`</h4>
+             <a href="#">
+              <img src="" id="`+data[i].id+`" class="img-fluid" style="width:400px; height:300px;"alt="playlistPicture">
+               </a>
+          </div>
+            `;
+
+        getSrc(data[i].id);
+        $("#playlists").html(html);
+        }
+
+
+      }
+    });
+  }
+
+  getPlaylists();
+
+
+  function getSrc(id){
+
+      var url
+      $.ajax({
+          type: "GET",
+            url: ' rest/playlistsongs/' + id,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function (data) {
+            for(var i=0;i<1;i++)
+            {
+                       $("#"+id).attr('src',data[i].cover + ".jpg");
+            }
+
+            }
+
+      });
+  }
+
+</script>
+
+
 
 </html>
