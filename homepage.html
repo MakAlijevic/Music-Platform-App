@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SoundWave</title>
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/styleshomepage.css" />
@@ -10,17 +12,17 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
 </head>
 
+
 <header>
   <nav class="navbar navbar-dark bg-transparent">
     <div class="container-fluid">
       <a class="navbar-brand ms-5" href="homepage.html" style="font-size: 1.5rem;">SoundWave</a>
 
 
-      <form class="d-flex">
+      <form class="d-flex" id="searchBar">
         <div class="position-relative w-100 mt-3">
-          <input class="form-control border-0 rounded-pill w-200 ps-4 pe-5" type="text"
-            placeholder="Search for a song..."
-            style="height: 40px; width: 700px; background-color:#282828;color:white ">
+          <input id="searchInput" class="form-control border-0 rounded-pill w-200 ps-4 pe-5" type="text"
+            placeholder="Search for a song..." style="height: 40px; width: 700px; background-color:#282828;color:white">
         </div>
       </form>
 
@@ -243,51 +245,45 @@
     </div>
   </div>
   <footer class="text-center text-white">
- <!-- Grid container -->
- <div class="container p-4 pb-0 pt-5 mt-5">
-   <!-- Section: Social media -->
-   <section class="mb-4">
-     <!-- Facebook -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-facebook-f"></i
-     ></a>
+    <!-- Grid container -->
+    <div class="container p-4 pb-0 pt-5 mt-5">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-facebook-f"></i></a>
 
-     <!-- Twitter -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-twitter"></i
-     ></a>
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-twitter"></i></a>
 
-     <!-- Google -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-google"></i
-     ></a>
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-google"></i></a>
 
-     <!-- Instagram -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-instagram"></i
-     ></a>
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-instagram"></i></a>
 
-     <!-- Linkedin -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-linkedin-in"></i
-     ></a>
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-linkedin-in"></i></a>
 
-     <!-- Github -->
-     <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"
-       ><i class="fab fa-github"></i
-     ></a>
-   </section>
-   <!-- Section: Social media -->
- </div>
- <!-- Grid container -->
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+            class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
 
- <!-- Copyright -->
- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-   Copyright ©2022 SoundWave,  Inc. All Rights Reserved
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      Copyright ©2022 SoundWave, Inc. All Rights Reserved
 
- </div>
- <!-- Copyright -->
-</footer>
+    </div>
+    <!-- Copyright -->
+  </footer>
 
   <div id="bottomPlayer" style="display: none;">
     <div class="footer py-2 fixed-bottom" style="height: 118px;" id="music-container">
@@ -721,37 +717,56 @@
     loadSong(songs[songIndex]);
     playSong();
   }
-  
-  function getPlaylists(){
 
-      $.ajax({
-          type: "GET",
-          url: ' rest/playlists',
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-          },
-          success: function (data) {
-            $("#submenu3").html("");
-            var html = "";
-            for(let i = 0; i < data.length; i++){
-            html += `
+  function getPlaylists() {
+
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlists',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        $("#submenu3").html("");
+        var html = "";
+        for (let i = 0; i < data.length; i++) {
+          html += `
 
               <li class="w-100">
-                <a href="playlists.html" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">`+data[i].name+`</span></a>
+                <a href="playlists.html" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;">`+ data[i].name + `</span></a>
               </li>
 
             `;
 
-          }
-          $("#submenu3").html(html);
         }
-      });
+        $("#submenu3").html(html);
+      }
+    });
   }
   getPlaylists();
+</script>
+<script>
+  //prevents form from reloading page
+  $("#searchBar").keypress(function (e) {
+    if (e.which == 13)
+      return false;
+  });
 
-
-
-
+  var searchQuery = document.getElementById("searchInput");
+  document.querySelector('#searchBar').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      $.ajax({
+        type: "GET",
+        url: ' rest/song/search/' + searchQuery.value,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+          console.log(data);
+        }
+      });
+    }
+  });
 </script>
 
 

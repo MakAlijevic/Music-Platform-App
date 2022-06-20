@@ -1,4 +1,9 @@
 <?php
+//get songs by search
+Flight::route('GET /song/search/@search', function($search){
+  Flight::json(Flight::songDao()->get_songs_by_search($search));
+});
+
 //CRUD operations for song
   //list all songs
   Flight::route('GET /song', function(){
