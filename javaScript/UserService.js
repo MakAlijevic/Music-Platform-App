@@ -185,7 +185,7 @@ var UserService = {
     getMainUsername: function () {
       if(localStorage.hasOwnProperty('username'))
       {
-           $("#profileUsername").text(localStorage.getItem("username"));
+           $("#mainUsername").text(localStorage.getItem("username"));
 
       }
       else {
