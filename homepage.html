@@ -734,7 +734,7 @@
           html += `
 
               <li class="w-100">
-                <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="getPlaylistID(`+data[i].id+`)"">`+data[i].name+`</span></button>
+                <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="getPlaylistID(`+ data[i].id + `)"">` + data[i].name + `</span></button>
               </li>
             `;
 
@@ -754,24 +754,15 @@
   var searchQuery = document.getElementById("searchInput");
   document.querySelector('#searchBar').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-      $.ajax({
-        type: "GET",
-        url: ' rest/song/search/' + searchQuery.value,
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function (data) {
-          console.log(data);
-        }
-      });
+      localStorage.setItem("searchQuery", searchQuery.value);
+      window.location.replace("search.html");
     }
   });
 
 
-  function getPlaylistID(id)
-  {
-      localStorage.setItem("playlistID", id);
-      window.location.replace("playlists.html");
+  function getPlaylistID(id) {
+    localStorage.setItem("playlistID", id);
+    window.location.replace("playlists.html");
   }
 
 </script>
