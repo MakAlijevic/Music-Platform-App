@@ -100,5 +100,12 @@ class BaseDao{
     public function update_element($id, $entity){
         $this->update($id, $entity);
     }
+
+    //method to search objects by given query
+    public function search_elements_by_query($query){
+      $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE title LIKE '%".$query."%'");
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
