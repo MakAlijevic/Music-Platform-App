@@ -752,9 +752,9 @@
       return false;
   });
 
+  var searchQuery = document.getElementById("searchInput");
   document.querySelector('#searchBar').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-      var searchQuery = document.getElementById("searchInput");
       $.ajax({
         type: "GET",
         url: ' rest/song/search/' + searchQuery.value,
