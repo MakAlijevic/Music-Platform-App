@@ -31,4 +31,8 @@ Flight::route('GET /song/search/@search', function($search){
     $data = Flight::request()->data->getData();
     Flight::json(Flight::songService()->update_element($id, $data));
   });
+
+  Flight::route('GET /song/getsong/@title', function($title){
+    Flight::json(Flight::songDao()->get_song_by_title($title));
+  });
 ?>

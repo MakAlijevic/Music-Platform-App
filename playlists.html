@@ -106,49 +106,18 @@
       <div class="col py-5 ms-5">
 
         <div class="float-container pb-5 pt-3 mt-5">
-          <div class="float-child ms-1 mb-5">
-            <h2 class="ms-5" id="playlistname"></h2>
-          </div>
-
-          <div class="float-child ms-0 mt-0 ps-0">
-            <button class="btn btn-lg btn-black rounded-circle shadow-none "
-              style="background-color: rgb(58, 55, 55); color: white; height:50px; width:50px;" type="button"
-              id="playbutton">
-              <i class="fas fa-play"></i>
-            </button>
+          <div class="float-child ">
+            <h2 class="ms-5" style="font-size: 3rem;" id="playlistname"></h2>
           </div>
         </div>
 
-        <div id="carouselExampleControls" class="carousel mt-5" style="width:100%; height: 300px;  margin:0 auto;"
-          data-bs-ride="carousel">
-          <div class="carousel-inner" id="carousel-populate">
-            <div class="carousel-item active" id="1-carousel-item-1">
+        <div class="col py-3">
+            <div class="container pt-5" style="height: 100px;">
             </div>
-            <div class="carousel-item" id="1-carousel-item-2">
+
+            <div class="list-group" id="searchList">
+
             </div>
-            <div class="carousel-item" id="1-carousel-item-3">
-            </div>
-            <div class="carousel-item" id="1-carousel-item-4">
-            </div>
-            <div class="carousel-item" id="1-carousel-item-5">2-
-            </div>
-            <div class="carousel-item" id="1-carousel-item-6">
-            </div>
-            <div class="carousel-item" id="1-carousel-item-7">
-            </div>
-            <div class="carousel-item" id="1-carousel-item-8">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
 
       </div>
@@ -194,28 +163,27 @@
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
-        for (let i = 0; i < data.length; i++) {
           var html = "";
-          html += `<div class="card bg-dark text-white">
-                            <img class="card-img" src="`+ data[i].cover + `.jpg" alt="Card image" style="opacity:0.8;">
-                            <div class="card-img-overlay">
-                              <h5 class="card-title mt-5" style="text-align: center">`+ data[i].title + `</h5>
-                              <div class="form-group" style="text-align: center">
-                                <button type="button" class="btn btn-default btn-sm shadow-none" onClick="getRandomSong(`+ i + `)">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="white" class="bi bi-play"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                      d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-                                  </svg>
-                                </button>
-                              </div>
-                            </div>
-                        </div>`;
-          $("#1-carousel-item-" + (i + 1)).html(html);
-          $("#2-carousel-item-" + (i - 8)).html(html);
-          $("#3-carousel-item-" + (i - 16)).html(html);
-          $("#4-carousel-item-" + (i - 24)).html(html);
+        for (let i = 0; i < data.length; i++) {
+          html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
+                  aria-current="true" style="color: white;">
+                  <div class="row mt-3">
+                      <div class="col-1">
+                          <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
+                              height="90px" width="90px">
+                      </div>
+                      <div class="col-9 ms-5" style="font-size: 25px; padding: 10px 0;">
+                          `+ data[i].title + `<br>
+                          <div style="font-size: 15px; color: gray;">
+                          `+ data[i].duration + `
+                          </div>
+                      </div>
+                  </div>
+              </button>`;
+              $("#searchList").html(html);
         }
+
+
       }
     });
   }

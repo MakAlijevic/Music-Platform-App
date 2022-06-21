@@ -292,6 +292,7 @@
       </div>
       <div class="tone-container float-end" style="width:150px;">
         <div class="row">
+        <button type="button" id="buttonid" class="btn btn-default" onClick="addToPlaylist()">BUTTON</button>
           <button class="btn btn-lg btn-black rounded-circle shadow-none col-md-5"
             style="background-color: rgba(58, 55, 55, 0); color: white; padding-right: 30px !important;" type="button"
             id="volume">
@@ -334,6 +335,8 @@
       </div>
     </div>
   </div>
+
+
   <audio src="music/song1" id="audio"></audio>
 </body>
 <script src="javaScript/jquery-3.6.0.min.js"></script>
@@ -515,6 +518,7 @@
 
   //initially load song info
   loadSong(songs[songIndex]);
+
 
   //update song details
   function loadSong(song) {
@@ -765,7 +769,51 @@
     window.location.replace("playlists.html");
   }
 
+  function addToPlaylist()
+  {
+
+    var playlist_songs={};
+    playlist_songs.playlistID=1;
+    playlist_songs.songID = getSongID();
+    $.ajax({
+        type: "POST",
+        url: ' rest/addsongs',
+        data: JSON.stringify(playlist_songs),
+        contentType: "application/json",
+        dataType: "json",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+          console.log(data);
+
+        }
+    });
+
+  }
+
+  function getSongID()
+{
+  var result="";
+  $.ajax({
+    type: "GET",
+    url: ' rest/song/getsong/' + title.innerText,
+    async: false,
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+    },
+    success: function (data) {
+      result=data.id;
+      }
+
+  });
+  return result;
+}
+
+
 </script>
+
+
 
 
 </html>
