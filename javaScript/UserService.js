@@ -342,12 +342,12 @@ var UserService = {
      $('#profilepictureedit').attr('src', url);
    },
 
-    deleteProfile: function()
+    deleteUser: function()
     {
       var id=UserService.getID();
       $.ajax({
           type: "DELETE",
-          url: ' rest/user/ ' +id,
+          url: ' rest/user/' +id,
           beforeSend: function (xhr) {
               xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
           },
@@ -358,6 +358,7 @@ var UserService = {
       });
 
     },
+
     editUser: function() {
      var editUser = {};
      editUser.name = $('#editFirstName').val();
