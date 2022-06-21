@@ -168,6 +168,7 @@
   </div>
 </div>
 
+<!-- Modal Avatar -->
 <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -179,17 +180,17 @@
       </div>
       <div class="modal-body">
         <input type="image" id="photo1" src="avatars/female1.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo2" src="avatars/female2.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo3" src="avatars/female3.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo4" src="avatars/male1.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo5" src="avatars/male2.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo6" src="avatars/male3.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
 
       </div>
     </div>
@@ -198,23 +199,6 @@
 
 <script>
   UserService.init();
-
-</script>
-<script>
-
-
-  function choosePhoto(id) {
-    var photoid = document.getElementById(id);
-    var url = photoid.getAttribute("src");
-    $('#photo').attr('value', url);
-    $('#avatarModal').modal("hide");
-    $('#SignUpModal').modal("show");
-    document.getElementById('chosenavatar').style.visibility = "visible";
-
-
-  }
-
-
 </script>
 
 

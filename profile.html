@@ -114,17 +114,17 @@
         </div>
         <div class="modal-body">
           <input type="image" id="photo1" src="avatars/female1.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
           <input type="image" id="photo2" src="avatars/female2.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
           <input type="image" id="photo3" src="avatars/female3.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
           <input type="image" id="photo4" src="avatars/male1.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
           <input type="image" id="photo5" src="avatars/male2.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
           <input type="image" id="photo6" src="avatars/male3.jpg" height="200" width="230"
-            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onclick="chooseAvatar(id)">
+            style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.chooseAvatar(id)">
 
         </div>
       </div>
@@ -195,7 +195,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button id="save" type="button" class="btn btn-primary" onclick="editProfile()">Save</button>
+            <button id="save" type="button" class="btn btn-primary" onClick="UserService.editUser()">Save</button>
           </div>
         </div>
       </form>
@@ -207,11 +207,11 @@
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript/UserService.js"></script>
-<script>
-  UserService.getPhotoHomepage();
-</script>
+<script src="javaScript/PlaylistService.js"></script>
+<script src="javaScript/SearchService.js"></script>
 
 <script>
+  UserService.getPhotoHomepage();
   UserService.getMainUsername();
   UserService.getFirstName();
   UserService.getLastName();
@@ -220,134 +220,7 @@
   UserService.getDateOfBirth();
   UserService.getPhoto();
 
-</script>
-
-<script>
-
-  function chooseAvatar(id) {
-    var photoid = document.getElementById(id);
-    var url = photoid.getAttribute("src");
-    $('#AvatarModal').modal("hide");
-    $('#EditProfileModal').modal("show");
-    $('#profilepictureedit').attr('src', url);
-  }
-
-  function editProfile() {
-    var editUser = {};
-    editUser.name = $('#editFirstName').val();
-    editUser.surname = $('#editLastName').val();
-    editUser.username = $('#editUsername').val();
-    editUser.email = $('#editEmail').val();
-    editUser.dateOfBirth = $('#editDateOfBirth').val();
-    editUser.photo = $('#profilepictureedit').attr('src');
-    var id = UserService.getID();
-
-    $.ajax({
-      url: ' rest/user/' + id,
-      type: 'PUT',
-      data: JSON.stringify(editUser),
-      contentType: "application/json",
-      dataType: "json",
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-      },
-      success: function (result) {
-          localStorage.setItem("profilePicture",editUser.photo);
-          localStorage.setItem("name",editUser.name);
-          localStorage.setItem("surname",editUser.surname);
-          localStorage.setItem("username",editUser.username);
-          localStorage.setItem("email",editUser.email);
-          localStorage.setItem("dateOfBirth",editUser.dateOfBirth);
-           $('#profilepictureedit').attr('src',localStorage.getItem("profilePicture"));
-           $("#profileFirstName").text(localStorage.getItem("name"));
-           $("#profileLastName").text(localStorage.getItem("surname"));
-           $("#profileUsername").text(localStorage.getItem("username"));
-           $("#profileEmail").text(localStorage.getItem("email"));
-           $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
-           $("#mainUsername").text(localStorage.getItem("username"));
-
-           $("#EditProfileModal").modal('hide');
-      }
-    });
-  }
-
-</script>
-<script>
-
-  function getPlaylists() {
-
-    $.ajax({
-      type: "GET",
-      url: ' rest/playlists',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-      },
-      success: function (data) {
-        $("#playlists").html("");
-        var html = "";
-        for (let i = 0; i < data.length; i++) {
-          html += `
-          <div class="col mt-3">
-            <h4 class="text-center mt-5">`+data[i].name+`</h4>
-             <a href="#" onClick="getPlaylistID(`+ data[i].id + `)">
-              <img src="" id="`+data[i].id+`" class="img-fluid" style="width:400px; height:300px;"alt="playlistPicture">
-               </a>
-          </div>
-            `;
-
-        getSrc(data[i].id);
-        $("#playlists").html(html);
-        }
-
-
-      }
-    });
-  }
-
   getPlaylists();
-
-
-  function getSrc(id){
-
-      var url
-      $.ajax({
-          type: "GET",
-            url: ' rest/playlistsongs/' + id,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-          },
-          success: function (data) {
-            for(var i=0;i<1;i++)
-            {
-                       $("#"+id).attr('src',data[i].cover + ".jpg");
-            }
-
-            }
-
-      });
-  }
-
-  function getPlaylistID(id) {
-    localStorage.setItem("playlistID", id);
-    window.location.replace("playlists.html");
-  }
-
-  function deleteUser()
-  {
-    var id=UserService.getID();
-    $.ajax({
-        type: "DELETE",
-        url: ' rest/user/ ' +id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function (data) {
-          localStorage.clear();
-          window.location.replace("index.html");
-        }
-    });
-
-  }
 
 </script>
 
@@ -363,7 +236,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger " onClick="deleteUser()">Delete</button>
+				<button type="button" class="btn btn-danger " onClick="UserService.deleteUser()">Delete</button>
 			</div>
 		</div>
 	</div>

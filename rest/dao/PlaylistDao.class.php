@@ -11,5 +11,6 @@ class PlaylistDao extends BaseDao{
     public function get_playlist_by_user($userID){
       return $this->query("SELECT * FROM playlist WHERE userID = :userID", ['userID' => $userID]);
     }
+
 }
 ?>

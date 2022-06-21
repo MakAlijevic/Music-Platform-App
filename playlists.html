@@ -127,66 +127,11 @@
 <script src="javaScript/jquery-3.6.0.min.js"></script>
 <script src="javaScript\bootstrap.bundle.min.js"></script>
 <script src="javaScript/UserService.js"></script>
+<script src="javaScript/SearchService.js"></script>
+<script src="javaScript/PlaylistService.js"></script>
 
 <script>
   UserService.getPhotoHomepage();
-
-
-  function getPlaylist() {
-
-    $.ajax({
-      type: "GET",
-      url: ' rest/playlists',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-      },
-      success: function (data) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].id == localStorage.getItem("playlistID")) {
-            $('#playlistname').text(data[i].name);
-            getSongs(data[i].id);
-          }
-
-        }
-      }
-    });
-  }
-
   getPlaylist();
-
-  function getSongs(id) {
-
-    $.ajax({
-      type: "GET",
-      url: ' rest/playlistsongs/' + id,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-      },
-      success: function (data) {
-          var html = "";
-        for (let i = 0; i < data.length; i++) {
-          html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
-                  aria-current="true" style="color: white;">
-                  <div class="row mt-3">
-                      <div class="col-1">
-                          <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
-                              height="90px" width="90px">
-                      </div>
-                      <div class="col-9 ms-5" style="font-size: 25px; padding: 10px 0;">
-                          `+ data[i].title + `<br>
-                          <div style="font-size: 15px; color: gray;">
-                          `+ data[i].duration + `
-                          </div>
-                      </div>
-                  </div>
-              </button>`;
-              $("#searchList").html(html);
-        }
-
-
-      }
-    });
-  }
-
-
+  listPlaylists();
 </script>

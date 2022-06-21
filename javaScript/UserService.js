@@ -310,6 +310,91 @@ var UserService = {
         });
       }
 
-    }
+    },
+    choosePhoto: function(id) {
+      var photoid = document.getElementById(id);
+      var url = photoid.getAttribute("src");
+      $('#photo').attr('value', url);
+      $('#avatarModal').modal("hide");
+      $('#SignUpModal').modal("show");
+      document.getElementById('chosenavatar').style.visibility = "visible";
+    },
+
+    getHomepageUsername: function () {
+      $.ajax({
+        type: "GET",
+        url: ' rest/username',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+          $('#usernamesmall').text(data);
+          $('#usernamelarge').text(data);
+          $('#welcomeback').text("Welcome back, " + data);
+        }
+      });
+    },
+    chooseAvatar: function(id) {
+     var photoid = document.getElementById(id);
+     var url = photoid.getAttribute("src");
+     $('#AvatarModal').modal("hide");
+     $('#EditProfileModal').modal("show");
+     $('#profilepictureedit').attr('src', url);
+   },
+
+    deleteProfile: function()
+    {
+      var id=UserService.getID();
+      $.ajax({
+          type: "DELETE",
+          url: ' rest/user/ ' +id,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function (data) {
+            localStorage.clear();
+            window.location.replace("index.html");
+          }
+      });
+
+    },
+    editUser: function() {
+     var editUser = {};
+     editUser.name = $('#editFirstName').val();
+     editUser.surname = $('#editLastName').val();
+     editUser.username = $('#editUsername').val();
+     editUser.email = $('#editEmail').val();
+     editUser.dateOfBirth = $('#editDateOfBirth').val();
+     editUser.photo = $('#profilepictureedit').attr('src');
+     var id = UserService.getID();
+
+     $.ajax({
+       url: ' rest/user/' + id,
+       type: 'PUT',
+       data: JSON.stringify(editUser),
+       contentType: "application/json",
+       dataType: "json",
+       beforeSend: function (xhr) {
+         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+       },
+       success: function (result) {
+           localStorage.setItem("profilePicture",editUser.photo);
+           localStorage.setItem("name",editUser.name);
+           localStorage.setItem("surname",editUser.surname);
+           localStorage.setItem("username",editUser.username);
+           localStorage.setItem("email",editUser.email);
+           localStorage.setItem("dateOfBirth",editUser.dateOfBirth);
+            $('#profilepictureedit').attr('src',localStorage.getItem("profilePicture"));
+            $("#profileFirstName").text(localStorage.getItem("name"));
+            $("#profileLastName").text(localStorage.getItem("surname"));
+            $("#profileUsername").text(localStorage.getItem("username"));
+            $("#profileEmail").text(localStorage.getItem("email"));
+            $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
+            $("#mainUsername").text(localStorage.getItem("username"));
+
+            $("#EditProfileModal").modal('hide');
+       }
+     });
+   }
 
 }
