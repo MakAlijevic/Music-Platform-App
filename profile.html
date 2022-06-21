@@ -94,7 +94,7 @@
         </div>
     </div>
 
-      <h2 class="text-center mt-5" style="font-size: 3rem; font-weight: 1000;">My playlists</h2>
+      <h2 class="text-center mt-5" style="font-size: 3rem;">My playlists</h2>
 
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" id="playlists">
@@ -153,7 +153,7 @@
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="name" type="text" id="editFirstName" class="form-control" required />
-              <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
+              <label class="form-label w-100" for="form3Example1c" style="color:#DDDBF1;text-align:center;">Your Name</label>
             </div>
           </div>
 
@@ -161,7 +161,7 @@
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="surname" type="text" id="editLastName" class="form-control" required />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
+              <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Your Surname</label>
             </div>
           </div>
 
@@ -169,7 +169,7 @@
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input type="text" id="editEmail" class="form-control" required />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
+              <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Your Email</label>
             </div>
           </div>
 
@@ -177,17 +177,17 @@
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="username" type="text" id="editUsername" class="form-control" required />
-              <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
+              <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Username</label>
             </div>
           </div>
 
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
-            <label>Date of Birth</label>
-            <input name="dob" type="date" id="editDateOfBirth" class="form-control" placeholder="Date of Birth"
+            <input name="dob" type="date" id="editDateOfBirth" class="form-control " placeholder="Date of Birth"
               required>
+            <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Date Of Birth</label>
           </div>
-          <div class="form-group" style="color:#DDDBF1; padding: 20px; align:center;">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <div class="form-group w-100" style="color:#DDDBF1; padding: 20px; text-align:center;">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">
               Delete Profile
             </button>
           </div>
@@ -289,7 +289,7 @@
           html += `
           <div class="col mt-3">
             <h4 class="text-center mt-5">`+data[i].name+`</h4>
-             <a href="#">
+             <a href="#" onClick="getPlaylistID(`+ data[i].id + `)">
               <img src="" id="`+data[i].id+`" class="img-fluid" style="width:400px; height:300px;"alt="playlistPicture">
                </a>
           </div>
@@ -327,8 +327,46 @@
       });
   }
 
+  function getPlaylistID(id) {
+    localStorage.setItem("playlistID", id);
+    window.location.replace("playlists.html");
+  }
+
+  function deleteUser()
+  {
+    var id=UserService.getID();
+    $.ajax({
+        type: "DELETE",
+        url: ' rest/user/ ' +id,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+          localStorage.clear();
+          window.location.replace("index.html");
+        }
+    });
+
+  }
+
 </script>
 
-
+<!-- Modal HTML -->
+<div id="deleteModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title w-100" style="text-align:center;">Are you sure?</h4>
+			</div>
+			<div class="modal-body">
+				<p class="mt-3" align="center">This will remove your profile and all of your playlists.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger " onClick="deleteUser()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 </html>
