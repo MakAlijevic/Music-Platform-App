@@ -311,6 +311,28 @@ var UserService = {
       }
 
     },
+    getPhotosProfile: function() {
+      if(localStorage.hasOwnProperty('profilePicture'))
+      {
+
+        document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
+        document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
+      }
+      else {
+        $.ajax({
+            url: ' rest/photo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (result) {
+              document.getElementById('smallphoto').src = result;
+              document.getElementById('profilepicture').src = result;
+            }
+        });
+      }
+
+    },
     choosePhoto: function(id) {
       var photoid = document.getElementById(id);
       var url = photoid.getAttribute("src");
