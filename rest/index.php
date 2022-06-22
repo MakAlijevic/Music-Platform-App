@@ -15,6 +15,8 @@ require_once __DIR__.'/services/PlaylistService.class.php';
 require_once __DIR__.'/dao/SongDao.class.php';
 require_once __DIR__.'/services/PlaylistSongsService.class.php';
 require_once __DIR__.'/dao/PlaylistSongsDao.class.php';
+require_once __DIR__.'/services/CountryService.class.php';
+require_once __DIR__.'/dao/CountryDao.class.php';
 
 
 Flight::register('userDao','UserDao');
@@ -25,13 +27,15 @@ Flight::register('playlistDao','PlaylistDao');
 Flight::register('playlistService', 'PlaylistService');
 Flight::register('playlistSongsDao','PlaylistSongsDao');
 Flight::register('playlistSongsService', 'PlaylistSongsService');
+Flight::register('countryDao','CountryDao');
+Flight::register('countryService', 'CountryService');
 
 
 
 //middleware login method
 Flight::route('/*', function(){
     $path = Flight::request()->url;
-    if($path == '/login' || $path == '/register'){
+    if($path == '/login' || $path == '/register' || $path == '/country'){
         return TRUE;
     }
     $headers = getallheaders();
@@ -54,6 +58,7 @@ require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/SongRoutes.php';
 require_once __DIR__.'/routes/PlaylistRoutes.php';
 require_once __DIR__.'/routes/PlaylistSongsRoutes.php';
+require_once __DIR__.'/routes/CountryRoutes.php';
 
 Flight::start();
 ?>
