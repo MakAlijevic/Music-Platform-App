@@ -7,6 +7,7 @@ var UserService = {
             window.location.replace("homepage.html");
         }
 
+        UserService.getCountries();
 
         $('#loginForm').validate({
             submitHandler: function (form) {
@@ -24,7 +25,8 @@ var UserService = {
                 user.password = $('#registerPassword').val();
                 user.email = $('#registerEmail').val();
                 user.dateOfBirth = $('#registerDateOfBirth').val();
-                user.photo=$('#photo').val();
+                user.photo = $('#photo').val();
+                user.countryID = localStorage.getItem($('#countryMenuButton').text());
                 UserService.register(user);
             }
         });
@@ -92,105 +94,250 @@ var UserService = {
     },
 
     getFirstName: function () {
-      if(localStorage.hasOwnProperty('name'))
-      {
-           $("#profileFirstName").text(localStorage.getItem("name"));
-           $.ajax({
-               type: "GET",
-               url: ' rest/firstname',
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-               },
-               success: function (data) {
-                   $('#editFirstName').val(data);
-               }
-           });
+        if (localStorage.hasOwnProperty('name')) {
+            $("#profileFirstName").text(localStorage.getItem("name"));
+            $.ajax({
+                type: "GET",
+                url: ' rest/firstname',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#editFirstName').val(data);
+                }
+            });
 
-      }
-      else {
-        $.ajax({
-            type: "GET",
-            url: ' rest/firstname',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (data) {
-                $('#profileFirstName').text(data);
-                $('#editFirstName').val(data);
-            }
-        });
-    }
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/firstname',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileFirstName').text(data);
+                    $('#editFirstName').val(data);
+                }
+            });
+        }
     },
 
     getLastName: function () {
-      if(localStorage.hasOwnProperty('surname'))
-      {
-           $("#profileLastName").text(localStorage.getItem("surname"));
-           $.ajax({
-               type: "GET",
-               url: ' rest/lastname',
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-               },
-               success: function (data) {
-                   $('#editLastName').val(data);
-               }
-           });
+        if (localStorage.hasOwnProperty('surname')) {
+            $("#profileLastName").text(localStorage.getItem("surname"));
+            $.ajax({
+                type: "GET",
+                url: ' rest/lastname',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#editLastName').val(data);
+                }
+            });
 
-      }
-      else {
-        $.ajax({
-            type: "GET",
-            url: ' rest/lastname',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (data) {
-                $('#profileLastName').text(data);
-                $('#editLastName').val(data);
-            }
-        });
-    }
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/lastname',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileLastName').text(data);
+                    $('#editLastName').val(data);
+                }
+            });
+        }
     },
 
     getUsername: function () {
-      if(localStorage.hasOwnProperty('username'))
-      {
-           $("#profileUsername").text(localStorage.getItem("username"));
-           $.ajax({
-               type: "GET",
-               url: ' rest/username',
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-               },
-               success: function (data) {
-                   $('#editUsername').val(data);
-               }
-           });
-      }
-      else {
-        $.ajax({
-            type: "GET",
-            url: ' rest/username',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (data) {
-                $('#profileUsername').text(data);
-                $('#editUsername').val(data);
+        if (localStorage.hasOwnProperty('username')) {
+            $("#profileUsername").text(localStorage.getItem("username"));
+            $.ajax({
+                type: "GET",
+                url: ' rest/username',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#editUsername').val(data);
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/username',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileUsername').text(data);
+                    $('#editUsername').val(data);
 
-            }
-        });
-    }
+                }
+            });
+        }
     },
 
     getMainUsername: function () {
-      if(localStorage.hasOwnProperty('username'))
-      {
-           $("#mainUsername").text(localStorage.getItem("username"));
+        if (localStorage.hasOwnProperty('username')) {
+            $("#mainUsername").text(localStorage.getItem("username"));
 
-      }
-      else {
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/username',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#mainUsername').text(data);
+                }
+            });
+        }
+    },
+
+    getEmail: function () {
+        if (localStorage.hasOwnProperty('email')) {
+            $("#profileEmail").text(localStorage.getItem("email"));
+            $.ajax({
+                type: "GET",
+                url: ' rest/email',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#editEmail').val(data);
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/email',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileEmail').text(data);
+                    $('#editEmail').val(data);
+                }
+            });
+        }
+    },
+
+    getDateOfBirth: function () {
+        if (localStorage.hasOwnProperty('dateOfBirth')) {
+            $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
+            $.ajax({
+                type: "GET",
+                url: ' rest/dob',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileDateOfBirth').text(data);
+                    $('#editDateOfBirth').val(data);
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/dob',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileDateOfBirth').text(data);
+                    $('#editDateOfBirth').val(data);
+                }
+            });
+        }
+    },
+    getPhoto: function () {
+
+        if (localStorage.hasOwnProperty('profilePicture')) {
+            document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
+            document.getElementById('profilepictureedit').src = localStorage.getItem('profilePicture');
+
+        }
+        else {
+            $.ajax({
+                url: ' rest/photo',
+                type: 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (result) {
+                    document.getElementById('profilepicture').src = result;
+                    document.getElementById('profilepictureedit').src = result;
+
+
+                }
+            });
+        }
+
+    },
+    getPhotoHomepage: function () {
+        if (localStorage.hasOwnProperty('profilePicture')) {
+
+            document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
+            document.getElementById('bigphoto').src = localStorage.getItem('profilePicture');
+        }
+        else {
+            $.ajax({
+                url: ' rest/photo',
+                type: 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (result) {
+                    document.getElementById('smallphoto').src = result;
+                    document.getElementById('bigphoto').src = result;
+                }
+            });
+        }
+
+    },
+    getPhotosProfile: function () {
+        if (localStorage.hasOwnProperty('profilePicture')) {
+
+            document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
+            document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
+        }
+        else {
+            $.ajax({
+                url: ' rest/photo',
+                type: 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (result) {
+                    document.getElementById('smallphoto').src = result;
+                    document.getElementById('profilepicture').src = result;
+                }
+            });
+        }
+
+    },
+    choosePhoto: function (id) {
+        var photoid = document.getElementById(id);
+        var url = photoid.getAttribute("src");
+        $('#photo').attr('value', url);
+        $('#avatarModal').modal("hide");
+        $('#SignUpModal').modal("show");
+        document.getElementById('chosenavatar').style.visibility = "visible";
+    },
+
+    getHomepageUsername: function () {
         $.ajax({
             type: "GET",
             url: ' rest/username',
@@ -198,228 +345,92 @@ var UserService = {
                 xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
             },
             success: function (data) {
-                $('#mainUsername').text(data);
+                $('#usernamesmall').text(data);
+                $('#usernamelarge').text(data);
+                $('#welcomeback').text("Welcome back, " + data);
             }
         });
-    }
+    },
+    chooseAvatar: function (id) {
+        var photoid = document.getElementById(id);
+        var url = photoid.getAttribute("src");
+        $('#AvatarModal').modal("hide");
+        $('#EditProfileModal').modal("show");
+        $('#profilepictureedit').attr('src', url);
     },
 
-    getEmail: function () {
-      if(localStorage.hasOwnProperty('email'))
-      {
-           $("#profileEmail").text(localStorage.getItem("email"));
-           $.ajax({
-               type: "GET",
-               url: ' rest/email',
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-               },
-               success: function (data) {
-                   $('#editEmail').val(data);
-               }
-           });
-
-      }
-      else {
+    deleteUser: function () {
+        var id = UserService.getID();
         $.ajax({
-            type: "GET",
-            url: ' rest/email',
+            type: "DELETE",
+            url: ' rest/user/' + id,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
             },
             success: function (data) {
-                $('#profileEmail').text(data);
-                $('#editEmail').val(data);
+                localStorage.clear();
+                window.location.replace("index.html");
             }
         });
-    }
+
     },
 
-    getDateOfBirth: function () {
-      if(localStorage.hasOwnProperty('dateOfBirth'))
-      {
-           $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
-           $.ajax({
-               type: "GET",
-               url: ' rest/dob',
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-               },
-               success: function (data) {
-                   $('#profileDateOfBirth').text(data);
-                   $('#editDateOfBirth').val(data);
-               }
-           });
+    editUser: function () {
+        var editUser = {};
+        editUser.name = $('#editFirstName').val();
+        editUser.surname = $('#editLastName').val();
+        editUser.username = $('#editUsername').val();
+        editUser.email = $('#editEmail').val();
+        editUser.dateOfBirth = $('#editDateOfBirth').val();
+        editUser.photo = $('#profilepictureedit').attr('src');
+        var id = UserService.getID();
 
-      }
-      else {
+        $.ajax({
+            url: ' rest/user/' + id,
+            type: 'PUT',
+            data: JSON.stringify(editUser),
+            contentType: "application/json",
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (result) {
+                localStorage.setItem("profilePicture", editUser.photo);
+                localStorage.setItem("name", editUser.name);
+                localStorage.setItem("surname", editUser.surname);
+                localStorage.setItem("username", editUser.username);
+                localStorage.setItem("email", editUser.email);
+                localStorage.setItem("dateOfBirth", editUser.dateOfBirth);
+                $('#profilepictureedit').attr('src', localStorage.getItem("profilePicture"));
+                $("#profileFirstName").text(localStorage.getItem("name"));
+                $("#profileLastName").text(localStorage.getItem("surname"));
+                $("#profileUsername").text(localStorage.getItem("username"));
+                $("#profileEmail").text(localStorage.getItem("email"));
+                $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
+                $("#mainUsername").text(localStorage.getItem("username"));
+
+                $("#EditProfileModal").modal('hide');
+            }
+        });
+    },
+
+    getCountries: function () {
         $.ajax({
             type: "GET",
-            url: ' rest/dob',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
+            url: ' rest/country',
+            async: false,
             success: function (data) {
-                $('#profileDateOfBirth').text(data);
-                $('#editDateOfBirth').val(data);
+                var html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += `<li><a class="dropdown-item" onClick="UserService.setCountry('` + data[i].name + `')">` + data[i].name + `</a></li>`;
+                    localStorage.setItem(data[i].name, data[i].id);
+                }
+                $("#countryDropdown").html(html);
             }
         });
+    },
+
+    setCountry: function (name) {
+        $("#countryMenuButton").text(name);
     }
-    },
-    getPhoto: function() {
-
-      if(localStorage.hasOwnProperty('profilePicture'))
-      {
-        document.getElementById('profilepicture').src =localStorage.getItem('profilePicture');
-        document.getElementById('profilepictureedit').src =localStorage.getItem('profilePicture');
-
-      }
-      else {
-        $.ajax({
-            url: ' rest/photo',
-            type: 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (result) {
-                document.getElementById('profilepicture').src = result;
-                document.getElementById('profilepictureedit').src =result;
-
-
-            }
-        });
-      }
-
-    },
-    getPhotoHomepage: function() {
-      if(localStorage.hasOwnProperty('profilePicture'))
-      {
-
-        document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
-        document.getElementById('bigphoto').src = localStorage.getItem('profilePicture');
-      }
-      else {
-        $.ajax({
-            url: ' rest/photo',
-            type: 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (result) {
-              document.getElementById('smallphoto').src = result;
-              document.getElementById('bigphoto').src = result;
-            }
-        });
-      }
-
-    },
-    getPhotosProfile: function() {
-      if(localStorage.hasOwnProperty('profilePicture'))
-      {
-
-        document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
-        document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
-      }
-      else {
-        $.ajax({
-            url: ' rest/photo',
-            type: 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (result) {
-              document.getElementById('smallphoto').src = result;
-              document.getElementById('profilepicture').src = result;
-            }
-        });
-      }
-
-    },
-    choosePhoto: function(id) {
-      var photoid = document.getElementById(id);
-      var url = photoid.getAttribute("src");
-      $('#photo').attr('value', url);
-      $('#avatarModal').modal("hide");
-      $('#SignUpModal').modal("show");
-      document.getElementById('chosenavatar').style.visibility = "visible";
-    },
-
-    getHomepageUsername: function () {
-      $.ajax({
-        type: "GET",
-        url: ' rest/username',
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function (data) {
-          $('#usernamesmall').text(data);
-          $('#usernamelarge').text(data);
-          $('#welcomeback').text("Welcome back, " + data);
-        }
-      });
-    },
-    chooseAvatar: function(id) {
-     var photoid = document.getElementById(id);
-     var url = photoid.getAttribute("src");
-     $('#AvatarModal').modal("hide");
-     $('#EditProfileModal').modal("show");
-     $('#profilepictureedit').attr('src', url);
-   },
-
-    deleteUser: function()
-    {
-      var id=UserService.getID();
-      $.ajax({
-          type: "DELETE",
-          url: ' rest/user/' +id,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-          },
-          success: function (data) {
-            localStorage.clear();
-            window.location.replace("index.html");
-          }
-      });
-
-    },
-
-    editUser: function() {
-     var editUser = {};
-     editUser.name = $('#editFirstName').val();
-     editUser.surname = $('#editLastName').val();
-     editUser.username = $('#editUsername').val();
-     editUser.email = $('#editEmail').val();
-     editUser.dateOfBirth = $('#editDateOfBirth').val();
-     editUser.photo = $('#profilepictureedit').attr('src');
-     var id = UserService.getID();
-
-     $.ajax({
-       url: ' rest/user/' + id,
-       type: 'PUT',
-       data: JSON.stringify(editUser),
-       contentType: "application/json",
-       dataType: "json",
-       beforeSend: function (xhr) {
-         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-       },
-       success: function (result) {
-           localStorage.setItem("profilePicture",editUser.photo);
-           localStorage.setItem("name",editUser.name);
-           localStorage.setItem("surname",editUser.surname);
-           localStorage.setItem("username",editUser.username);
-           localStorage.setItem("email",editUser.email);
-           localStorage.setItem("dateOfBirth",editUser.dateOfBirth);
-            $('#profilepictureedit').attr('src',localStorage.getItem("profilePicture"));
-            $("#profileFirstName").text(localStorage.getItem("name"));
-            $("#profileLastName").text(localStorage.getItem("surname"));
-            $("#profileUsername").text(localStorage.getItem("username"));
-            $("#profileEmail").text(localStorage.getItem("email"));
-            $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
-            $("#mainUsername").text(localStorage.getItem("username"));
-
-            $("#EditProfileModal").modal('hide');
-       }
-     });
-   }
-
 }

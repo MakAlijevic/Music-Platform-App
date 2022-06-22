@@ -31,5 +31,10 @@ body {
 }
 
 .modal-content {
-  background-color: #0c0117;
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(33, 7, 48), rgb(0, 0, 0));
+}
+
+.dropdown-menu {
+  max-height: 250px;
+  overflow-y: auto;
 }

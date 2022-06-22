@@ -66,7 +66,7 @@
         <div class="modal-body">
 
           <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+            <i class="fas fa-user fa-lg fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="name" type="text" id="registerName" class="form-control" required />
               <label class="form-label" for="form3Example1c" style="color:#DDDBF1">Your Name</label>
@@ -74,7 +74,7 @@
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <i class="fas fa-envelope fa-lg fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="surname" type="text" id="registerSurname" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Surname</label>
@@ -82,7 +82,7 @@
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <i class="fas fa-envelope fa-lg fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input type="text" id="registerEmail" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Your Email</label>
@@ -90,25 +90,35 @@
           </div>
 
           <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <i class="fas fa-envelope fa-lg fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="username" type="text" id="registerUsername" class="form-control" required />
               <label class="form-label" for="form3Example3c" style="color:#DDDBF1">Username</label>
             </div>
           </div>
 
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+          <div class="d-flex flex-row align-items-center mb-3">
+            <i class="fas fa-lock fa-lg fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
               <input name="password " type="password" id="registerPassword" class="form-control" required />
               <label class="form-label" for="form3Example4c" style="color:#DDDBF1">Password</label>
             </div>
           </div>
 
-          <div class="form-group" style="color:#DDDBF1; padding: 20px;">
-            <label>Date of Birth</label>
-            <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth"
-              required>
+          <div class="d-flex flex-row align-items-center" style="color:#DDDBF1; padding: 20px;">
+            <div class="form-outline flex-fill mb-0">
+              <input name="dob" type="date" id="registerDateOfBirth" class="form-control" placeholder="Date of Birth"
+                required>
+              <label>Date of Birth</label>
+            </div>
+          </div>
+          <div class="dropdown mt-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="countryMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false" style="width: 300px; background-color: #000000;">
+              Select Country
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="countryMenuButton" id="countryDropdown">
+            </ul>
           </div>
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
             <button type="button" id="buttonavatar" class="btn btn-default btn-lg h-500 center-v center-h"
@@ -180,17 +190,23 @@
       </div>
       <div class="modal-body">
         <input type="image" id="photo1" src="avatars/female1.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo2" src="avatars/female2.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo3" src="avatars/female3.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo4" src="avatars/male1.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo5" src="avatars/male2.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
         <input type="image" id="photo6" src="avatars/male3.jpg" height="200" width="230"
-          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img" onClick="UserService.choosePhoto(id)">
+          style="padding-right: 3px;padding-bottom: 3px;padding-left: 5px;" class="img"
+          onClick="UserService.choosePhoto(id)">
 
       </div>
     </div>
