@@ -1,3 +1,5 @@
+
+
 var UserService = {
     init: function () {
         var token = localStorage.getItem("token");

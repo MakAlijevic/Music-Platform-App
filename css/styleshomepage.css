@@ -162,6 +162,13 @@ body {
   }
 }
 
+.modal-content {
+  background-color: #0c0117;
+}
+
+
+
+
 footer {
   background-color: linear-gradient(rgb(28, 10, 46), black);
 }

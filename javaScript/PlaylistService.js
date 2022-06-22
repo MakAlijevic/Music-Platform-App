@@ -1,3 +1,5 @@
+
+
 function listPlaylists() {
   $.ajax({
     type: "GET",
@@ -22,15 +24,65 @@ function listPlaylists() {
   });
 }
 
+function listPlaylistsModal() {
+  $.ajax({
+    type: "GET",
+    url: ' rest/playlists',
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+    },
+    success: function (data) {
+      var html = `<a href="#" onClick="addNewPlaylistModal()" class="list-group-item list-group-item-action list-group-item-dark">✚ New playlist</a>`
+      for (let i = 0; i < data.length; i++) {
+        html += `
+        <a href="#" onClick="addToPlaylist(`+ data[i].id + `)" class="list-group-item list-group-item-action list-group-item-dark">♫ ` + data[i].name + `</a>
+          `;
+
+      }
+      $("#listgroup").html(html);
+    }
+  });
+}
+
+
 function getPlaylistID(id) {
   localStorage.setItem("playlistID", id);
   window.location.replace("playlists.html");
 }
 
-function addToPlaylist()
+function addNewPlaylist()
+{
+  var playlist={};
+  playlist.userID=UserService.getID();
+  playlist.name = $('#playlistName').val();
+  $.ajax({
+      type: "POST",
+      url: ' rest/playlists',
+      data: JSON.stringify(playlist),
+      contentType: "application/json",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+         $('#addPlaylistModal').modal('hide');
+        addToPlaylist(data.id);
+      }
+  });
+}
+
+
+function addNewPlaylistModal()
+{
+  $('#addPlaylistModal').modal('toggle');
+  $('#addToPlaylistModal').modal('hide');
+
+}
+
+function addToPlaylist(id)
 {
   var playlist_songs={};
-  playlist_songs.playlistID=1;
+  playlist_songs.playlistID=id;
   playlist_songs.songID = getSongID();
   $.ajax({
       type: "POST",
@@ -42,8 +94,7 @@ function addToPlaylist()
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
-        console.log(data);
-
+        $('#addToPlaylistModal').modal('hide');
       }
   });
 }
@@ -112,6 +163,8 @@ function getPlaylists() {
       }
     });
   }
+
+
   function getPlaylistSongs(id) {
 
     $.ajax({
@@ -140,7 +193,6 @@ function getPlaylists() {
               </button>`;
               $("#searchList").html(html);
         }
-
 
       }
     });

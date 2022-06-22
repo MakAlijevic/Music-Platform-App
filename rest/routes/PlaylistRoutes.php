@@ -13,7 +13,10 @@
 
   //add playlist
 
-  //delete playlist
+  Flight::route('POST /playlists', function(){
+    Flight::json(Flight::playlistDao()->add_element(Flight::request()->data->getData()));
+});
+
 
   //update playlist
 
