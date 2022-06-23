@@ -7,7 +7,7 @@ var UserService = {
             window.location.replace("homepage.html");
         }
 
-        UserService.getCountries();
+        UserService.getCountriesOnRegister();
 
         $('#loginForm').validate({
             submitHandler: function (form) {
@@ -262,6 +262,44 @@ var UserService = {
             });
         }
     },
+
+    getCountry: function () {
+        if (localStorage.hasOwnProperty('countryID')) {
+            $('#profileCountry').text(UserService.getCountryById(localStorage.getItem("countryID")));
+            $("#editCountry").text(UserService.getCountryById(localStorage.getItem("countryID")));
+
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: ' rest/country/user',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
+                success: function (data) {
+                    $('#profileCountry').text(UserService.getCountryById(data))
+                    $("#editCountry").text(UserService.getCountryById(data));
+                }
+            });
+        }
+    },
+
+    getCountryById: function (id) {
+        var name = "";
+        $.ajax({
+            type: "GET",
+            url: ' rest/country/' + id,
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                name = data.name;
+            }
+        });
+        return name;
+    },
+
     getPhoto: function () {
 
         if (localStorage.hasOwnProperty('profilePicture')) {
@@ -383,6 +421,7 @@ var UserService = {
         editUser.email = $('#editEmail').val();
         editUser.dateOfBirth = $('#editDateOfBirth').val();
         editUser.photo = $('#profilepictureedit').attr('src');
+        editUser.countryID = UserService.getCountryByName($('#editCountry').text());
         var id = UserService.getID();
 
         $.ajax({
@@ -401,6 +440,7 @@ var UserService = {
                 localStorage.setItem("username", editUser.username);
                 localStorage.setItem("email", editUser.email);
                 localStorage.setItem("dateOfBirth", editUser.dateOfBirth);
+                localStorage.setItem("countryID", editUser.countryID);
                 $('#profilepictureedit').attr('src', localStorage.getItem("profilePicture"));
                 $("#profileFirstName").text(localStorage.getItem("name"));
                 $("#profileLastName").text(localStorage.getItem("surname"));
@@ -408,13 +448,14 @@ var UserService = {
                 $("#profileEmail").text(localStorage.getItem("email"));
                 $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
                 $("#mainUsername").text(localStorage.getItem("username"));
+                $('#profileCountry').text(UserService.getCountryById(localStorage.getItem("countryID")));
 
                 $("#EditProfileModal").modal('hide');
             }
         });
     },
 
-    getCountries: function () {
+    getCountriesOnRegister: function () {
         $.ajax({
             type: "GET",
             url: ' rest/country',
@@ -430,7 +471,42 @@ var UserService = {
         });
     },
 
+    getCountries: function () {
+        $.ajax({
+            type: "GET",
+            url: ' rest/country',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                var html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += `<li><a class="dropdown-item" onClick="UserService.setCountry('` + data[i].name + `')">` + data[i].name + `</a></li>`;
+                }
+                $("#countryDropdown").html(html);
+            }
+        });
+    },
+
     setCountry: function (name) {
         $("#countryMenuButton").text(name);
+        $("#editCountry").text(name);
+    },
+
+    getCountryByName: function (name) {
+        var id = "";
+        $.ajax({
+            type: "GET",
+            url: ' rest/country/getcountry/' + name,
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                id = data.id;
+            }
+        });
+        return id;
     }
 }

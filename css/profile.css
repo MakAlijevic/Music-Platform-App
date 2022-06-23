@@ -12,7 +12,7 @@ body {
 }
 
 .modal-content {
-  background-color: rgb(28, 10, 46);
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(33, 7, 48), rgb(0, 0, 0));
 }
 
 .cover-container {
