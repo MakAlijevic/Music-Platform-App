@@ -35,7 +35,7 @@ Flight::register('countryService', 'CountryService');
 //middleware login method
 Flight::route('/*', function(){
     $path = Flight::request()->url;
-    if($path == '/login' || $path == '/register' || $path == '/country'){
+    if($path == '/login' || $path == '/register' || $path == '/country' || $path == '/docs.json'){
         return TRUE;
     }
     $headers = getallheaders();
@@ -52,6 +52,13 @@ Flight::route('/*', function(){
             return FALSE;
         }
     }
+});
+
+/*swagger*/
+Flight::route('GET /docs.json', function(){
+  $openapi = \OpenApi\scan('routes');
+  header('Content-Type: application/json');
+  echo $openapi->toJson();
 });
 
 require_once __DIR__.'/routes/UserRoutes.php';
