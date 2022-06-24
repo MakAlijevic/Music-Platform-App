@@ -219,19 +219,18 @@ function getRandomSong(id) {
 }
 
 
-function getSongID()
-{
-  var result="";
+function getSongID(name) {
+  var result = "";
   $.ajax({
     type: "GET",
-    url: ' rest/song/getsong/' + title.innerText,
+    url: ' rest/song/getsong/' + name,
     async: false,
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
     },
     success: function (data) {
-      result=data.id;
-      }
+      result = data.id;
+    }
 
   });
   return result;
