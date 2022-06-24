@@ -166,8 +166,13 @@ body {
   background-color: #0c0117;
 }
 
+img[alt~="profilePicture"] {
+  border: 2px solid white;
+}
 
-
+img[alt~="playlistPicture"] {
+  border: 2px solid white;
+}
 
 footer {
   background-color: linear-gradient(rgb(28, 10, 46), black);

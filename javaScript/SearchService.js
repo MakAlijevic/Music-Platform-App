@@ -1,29 +1,31 @@
 //prevents form from reloading page
 $("#searchBar").keypress(function (e) {
-  if (e.which == 13)
-    return false;
+    if (e.which == 13)
+        return false;
 });
 
 var searchQuery = document.getElementById("searchInput");
 document.querySelector('#searchBar').addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    localStorage.setItem("searchQuery", searchQuery.value);
-    window.location.replace("search.html");
-  }
-});
+    if (e.key === 'Enter') {
+        localStorage.setItem("searchQuery", searchQuery.value);
+        showSearch();
 
-var searchParam = localStorage.getItem("searchQuery");
-$.ajax({
-    type: "GET",
-    url: ' rest/song/search/' + searchParam,
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-    },
-    success: function (data) {
-        var html = "";
-        for (let i = 0; i < data.length; i++) {
-            html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
-                    aria-current="true" style="color: white;">
+        var searchParam = localStorage.getItem("searchQuery");
+        $.ajax({
+            type: "GET",
+            url: ' rest/song/search/' + searchParam,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                var html = "";
+                if (data.length == 0) {
+                    document.getElementById("searchList").classList.add("d-none");
+                }
+                for (let i = 0; i < data.length; i++) {
+                    document.getElementById("searchList").classList.remove("d-none");
+                    html += `<button type="button" class="btn btn-default pb-4 list-group-item list-group-item-action bg-transparent"
+                    aria-current="true" style="color: white;" onClick="getRandomSong(` + data[i].id + `-1)">
                     <div class="row mt-3">
                         <div class="col-1">
                             <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
@@ -37,7 +39,10 @@ $.ajax({
                         </div>
                     </div>
                 </button>`;
-            $("#searchList").html(html);
-        }
+                    $("#searchList").html(html);
+                }
+            }
+        });
     }
 });
+localStorage.removeItem("searchQuery");
