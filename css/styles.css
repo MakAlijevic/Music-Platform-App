@@ -38,3 +38,17 @@ body {
   max-height: 250px;
   overflow-y: auto;
 }
+
+#buttonavatar {
+  width: 300px;
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #ffffff;
+}
+
+#countryMenuButton {
+  width: 300px;
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #ffffff;
+}

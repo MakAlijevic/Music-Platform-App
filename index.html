@@ -113,17 +113,17 @@
             </div>
           </div>
           <div class="dropdown mt-2">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="countryMenuButton"
-              data-bs-toggle="dropdown" aria-expanded="false" style="width: 300px; background-color: #000000;">
+            <button class="btn btn-secondary mt-2 dropdown-toggle" type="button" id="countryMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false" required="required">
               Select Country
             </button>
             <ul class="dropdown-menu" aria-labelledby="countryMenuButton" id="countryDropdown">
             </ul>
           </div>
           <div class="form-group" style="color:#DDDBF1; padding: 20px;">
-            <button type="button" id="buttonavatar" class="btn btn-default btn-lg h-500 center-v center-h"
-              data-bs-toggle="modal" data-bs-target="#avatarModal" style="color:white;">Choose Your Avatar</button>
-            <input name="photo" type="text" id="photo" class="form-control" value="" hidden />
+            <button type="button" id="buttonavatar" class="btn btn-default mt-3 h-500 center-v center-h"
+              data-bs-toggle="modal" data-bs-target="#avatarModal">Choose Your Avatar</button>
+            <input name="photo" type="text" id="photo" class="form-control d-none" value="" required />
           </div>
           <div class="form-group" style="color:#DDDBF1; padding: 10px;">
             <label id="chosenavatar" style="visibility:hidden;">Avatar saved</label>
