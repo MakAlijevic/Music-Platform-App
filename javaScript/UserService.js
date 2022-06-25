@@ -442,7 +442,7 @@ var UserService = {
                 $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
                 $("#mainUsername").text(localStorage.getItem("username"));
                 $('#profileCountry').text(UserService.getCountryById(localStorage.getItem("countryID")));
-                $("#EditProfileModal").modal('hide');
+                window.location.reload();
             }
         });
     },

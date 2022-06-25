@@ -273,14 +273,35 @@
       <!--Playlist-->
       <div class="col py-5 ms-5 d-none" id="playlist">
         <div class="float-container pb-5 pt-3 mt-5" style="border: 3px; padding: 20px;">
-          <div class="float-child" style="width: 45%; float: left; padding: 20px; border: 2px;">
-            <h2 class="ms-5" style="font-size: 3rem;" id="playlistname"></h2>
+          <div class="float-child" style="width: auto; float: left; padding: 20px; border: 2px;">
+            <h2 class="ms-0 mb-0" style="font-size: 3rem;" id="playlistname"></h2>
+          </div>
+          <div class="float-child" style="width: auto; float: left; padding: 20px; border: 1px;">
+            <button type="button" class="btn btn-danger ms-0 mt-2" data-bs-toggle="modal"
+              data-bs-target="#deletePlaylist">Remove this playlist</h2>
           </div>
         </div>
         <div class="col py-3">
           <div class="container pt-5" style="height: 100px;">
           </div>
           <div class="list-group" id="playlistList">
+          </div>
+        </div>
+      </div>
+      <div id="deletePlaylist" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+          <div class="modal-content"
+            style="background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(33, 7, 48), rgb(0, 0, 0));">
+            <div class="modal-header">
+              <h4 class="modal-title w-100" style="text-align:center;">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+              <p class="mt-3" style="text-align: center;">This will delete your playlist.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger " onClick="PlaylistService.deletePlaylist()">Delete</button>
+            </div>
           </div>
         </div>
       </div>

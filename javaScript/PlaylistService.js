@@ -12,7 +12,7 @@ var PlaylistService = {
         for (let i = 0; i < data.length; i++) {
           html += `
             <li class="w-100">
-              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="PlaylistService.getPlaylistID(`+ data[i].id + `)"">` + data[i].name + `</span></button>
+              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
             </li>
           `;
 
@@ -43,11 +43,6 @@ var PlaylistService = {
   },
 
 
-  getPlaylistID: function (id) {
-    localStorage.setItem("playlistID", id);
-    SinglePageService.showPlaylist();
-  },
-
   addNewPlaylist: function () {
     var playlist = {};
     playlist.userID = UserService.getID();
@@ -64,6 +59,8 @@ var PlaylistService = {
       success: function (data) {
         $('#addPlaylistModal').modal('hide');
         PlaylistService.addToPlaylist(data.id);
+         window.location.reload();
+
       }
     });
   },
@@ -80,7 +77,7 @@ var PlaylistService = {
     playlist_songs.songID = SongService.getSongID(title.innerText);
     $.ajax({
       type: "POST",
-      url: ' rest/addsongs',
+      url: ' rest/playlistsongs',
       data: JSON.stringify(playlist_songs),
       contentType: "application/json",
       dataType: "json",
@@ -107,7 +104,7 @@ var PlaylistService = {
           html += `
         <div class="col mt-3">
           <h4 class="text-center mt-5">`+ data[i].name + `</h4>
-           <a href="#" onClick="PlaylistService.getPlaylistID(`+ data[i].id + `)">
+           <a href="#" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)">
             <img src="" id="`+ data[i].id + `" class="img-fluid" style="width:400px; height:300px;"alt="playlistPicture">
              </a>
         </div>
@@ -134,7 +131,7 @@ var PlaylistService = {
     });
   },
 
-  getPlaylist: function () {
+  getPlaylist: function (id) {
     $.ajax({
       type: "GET",
       url: ' rest/playlists',
@@ -143,7 +140,8 @@ var PlaylistService = {
       },
       success: function (data) {
         for (let i = 0; i < data.length; i++) {
-          if (data[i].id == localStorage.getItem("playlistID")) {
+          if (data[i].id == id) {
+            SinglePageService.showPlaylist();
             $('#playlistname').text(data[i].name);
             PlaylistService.getPlaylistSongs(data[i].id);
           }
@@ -181,6 +179,40 @@ var PlaylistService = {
           $("#playlistList").html(html);
         }
       }
+    });
+  },
+  getPlaylistID: function()
+  {
+    var id="";
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlists',
+      async:false,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].name == $('#playlistname').text()) {
+            id=data[i].id;
+          }
+        }
+      }
+    });
+    return id;
+  },
+  deletePlaylist: function()
+  {
+    var id = PlaylistService.getPlaylistID();
+    $.ajax({
+        type: "DELETE",
+        url: ' rest/playlists/' + id,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+            window.location.reload();
+        }
     });
   }
 }
