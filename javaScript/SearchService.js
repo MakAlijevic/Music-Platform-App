@@ -7,7 +7,7 @@ var SearchService = {
         });
 
         var searchQuery = document.getElementById("searchInput");
-        document.querySelector('#searchBar').addEventListener('keypress', function (e) {
+        $('#searchBar').keypress(function (e) {
             if (e.key === 'Enter') {
                 localStorage.setItem("searchQuery", searchQuery.value);
                 SinglePageService.showSearch();
@@ -22,10 +22,10 @@ var SearchService = {
                     success: function (data) {
                         var html = "";
                         if (data.length == 0) {
-                            document.getElementById("searchList").classList.add("d-none");
+                            $("#searchList").addClass("d-none");
                         }
                         for (let i = 0; i < data.length; i++) {
-                            document.getElementById("searchList").classList.remove("d-none");
+                            $("#searchList").removeClass("d-none");
                             html += `<button type="button" class="btn btn-default pb-4 list-group-item list-group-item-action bg-transparent"
                     aria-current="true" style="color: white;" onClick="SongService.getRandomSong(` + data[i].id + `-1)">
                     <div class="row mt-3">

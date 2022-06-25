@@ -1,5 +1,3 @@
-
-
 var UserService = {
     init: function () {
         var token = localStorage.getItem("token");
@@ -41,7 +39,6 @@ var UserService = {
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
                 localStorage.setItem("token", data.token);
                 window.location.replace("homepage.html");
 
@@ -242,7 +239,6 @@ var UserService = {
                     xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
                 },
                 success: function (data) {
-                    $('#profileDateOfBirth').text(data);
                     $('#editDateOfBirth').val(data);
                 }
             });
@@ -301,10 +297,9 @@ var UserService = {
     },
 
     getPhoto: function () {
-
         if (localStorage.hasOwnProperty('profilePicture')) {
-            document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
-            document.getElementById('profilepictureedit').src = localStorage.getItem('profilePicture');
+            $('#profilepicture').attr("src", localStorage.getItem('profilePicture'));
+            $('#profilepictureedit').attr("src", localStorage.getItem('profilePicture'));
 
         }
         else {
@@ -315,10 +310,8 @@ var UserService = {
                     xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
                 },
                 success: function (result) {
-                    document.getElementById('profilepicture').src = result;
-                    document.getElementById('profilepictureedit').src = result;
-
-
+                    $('#profilepicture').attr("src", result);
+                    $('#profilepictureedit').attr("src", result);
                 }
             });
         }
@@ -326,9 +319,8 @@ var UserService = {
     },
     getPhotoHomepage: function () {
         if (localStorage.hasOwnProperty('profilePicture')) {
-
-            document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
-            document.getElementById('bigphoto').src = localStorage.getItem('profilePicture');
+            $('#smallphoto').attr("src", localStorage.getItem('profilePicture'));
+            $('#bigphoto').attr("src", localStorage.getItem('profilePicture'));
         }
         else {
             $.ajax({
@@ -338,8 +330,8 @@ var UserService = {
                     xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
                 },
                 success: function (result) {
-                    document.getElementById('smallphoto').src = result;
-                    document.getElementById('bigphoto').src = result;
+                    $('#smallphoto').attr("src", result);
+                    $('#bigphoto').attr("src", result);
                 }
             });
         }
@@ -348,8 +340,8 @@ var UserService = {
     getPhotosProfile: function () {
         if (localStorage.hasOwnProperty('profilePicture')) {
 
-            document.getElementById('smallphoto').src = localStorage.getItem('profilePicture');
-            document.getElementById('profilepicture').src = localStorage.getItem('profilePicture');
+            $('#smallphoto').attr("src", localStorage.getItem('profilePicture'));
+            $('#profilepicture').attr("src", localStorage.getItem('profilePicture'));
         }
         else {
             $.ajax({
@@ -359,20 +351,20 @@ var UserService = {
                     xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
                 },
                 success: function (result) {
-                    document.getElementById('smallphoto').src = result;
-                    document.getElementById('profilepicture').src = result;
+                    $('#smallphoto').attr("src", result);
+                    $('#profilepicture').attr("src", result);
                 }
             });
         }
 
     },
     choosePhoto: function (id) {
-        var photoid = document.getElementById(id);
-        var url = photoid.getAttribute("src");
+        var photoid = $('#' + id);
+        var url = photoid.attr("src");
         $('#photo').attr('value', url);
         $('#avatarModal').modal("hide");
         $('#SignUpModal').modal("show");
-        document.getElementById('chosenavatar').style.visibility = "visible";
+        $('#chosenavatar').css("visibility", "visible");
     },
 
     getHomepageUsername: function () {
@@ -391,8 +383,8 @@ var UserService = {
     },
 
     chooseAvatar: function (id) {
-        var photoid = document.getElementById(id);
-        var url = photoid.getAttribute("src");
+        var photoid = $("#" + id);
+        var url = photoid.attr("src");
         $('#AvatarModal').modal("hide");
         $('#EditProfileModal').modal("show");
         $('#profilepictureedit').attr('src', url);
@@ -450,7 +442,6 @@ var UserService = {
                 $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
                 $("#mainUsername").text(localStorage.getItem("username"));
                 $('#profileCountry').text(UserService.getCountryById(localStorage.getItem("countryID")));
-
                 $("#EditProfileModal").modal('hide');
             }
         });

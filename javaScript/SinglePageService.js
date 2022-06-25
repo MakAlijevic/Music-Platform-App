@@ -1,46 +1,46 @@
 var SinglePageService = {
     showAboutUs: function () {
-        document.getElementById("aboutUs").classList.remove("d-none");
-        document.getElementById("homepage").classList.add("d-none");
-        document.getElementById("playlist").classList.add("d-none");
-        document.getElementById("search").classList.add("d-none");
-        document.getElementById("profile").classList.add("d-none");
-        document.getElementById("leftNavBar").classList.remove("d-none");
+        $("#aboutUs").removeClass("d-none");
+        $("#homepage").addClass("d-none");
+        $("#playlist").addClass("d-none");
+        $("#search").addClass("d-none");
+        $("#profile").addClass("d-none");
+        $("#leftNavBar").removeClass("d-none");
     },
 
     showHomepage: function () {
-        document.getElementById("homepage").classList.remove("d-none");
-        document.getElementById("aboutUs").classList.add("d-none");
-        document.getElementById("playlist").classList.add("d-none");
-        document.getElementById("search").classList.add("d-none");
-        document.getElementById("profile").classList.add("d-none");
-        document.getElementById("leftNavBar").classList.remove("d-none");
+        $("#homepage").removeClass("d-none");
+        $("#aboutUs").addClass("d-none");
+        $("#playlist").addClass("d-none");
+        $("#search").addClass("d-none");
+        $("#profile").addClass("d-none");
+        $("#leftNavBar").removeClass("d-none");
     },
 
     showPlaylist: function () {
-        document.getElementById("playlist").classList.remove("d-none");
-        document.getElementById("aboutUs").classList.add("d-none");
-        document.getElementById("homepage").classList.add("d-none");
-        document.getElementById("search").classList.add("d-none");
-        document.getElementById("profile").classList.add("d-none");
-        document.getElementById("leftNavBar").classList.remove("d-none");
+        $("#playlist").removeClass("d-none");
+        $("#aboutUs").addClass("d-none");
+        $("#homepage").addClass("d-none");
+        $("#search").addClass("d-none");
+        $("#profile").addClass("d-none");
+        $("#leftNavBar").removeClass("d-none");
     },
 
     showSearch: function () {
-        document.getElementById("search").classList.remove("d-none");
-        document.getElementById("playlist").classList.add("d-none");
-        document.getElementById("aboutUs").classList.add("d-none");
-        document.getElementById("homepage").classList.add("d-none");
-        document.getElementById("profile").classList.add("d-none");
-        document.getElementById("leftNavBar").classList.remove("d-none");
+        $("#search").removeClass("d-none");
+        $("#playlist").addClass("d-none");
+        $("#aboutUs").addClass("d-none");
+        $("#homepage").addClass("d-none");
+        $("#profile").addClass("d-none");
+        $("#leftNavBar").removeClass("d-none");
     },
 
     showProfile: function () {
-        document.getElementById("profile").classList.remove("d-none");
-        document.getElementById("search").classList.add("d-none");
-        document.getElementById("playlist").classList.add("d-none");
-        document.getElementById("aboutUs").classList.add("d-none");
-        document.getElementById("homepage").classList.add("d-none");
-        document.getElementById("leftNavBar").classList.add("d-none");
+        $("#profile").removeClass("d-none");
+        $("#search").addClass("d-none");
+        $("#playlist").addClass("d-none");
+        $("#aboutUs").addClass("d-none");
+        $("#homepage").addClass("d-none");
+        $("#leftNavBar").addClass("d-none");
     }
 }
