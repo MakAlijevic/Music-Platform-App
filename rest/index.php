@@ -12,7 +12,7 @@ require_once __DIR__.'/dao/UserDao.class.php';
 require_once __DIR__.'/services/SongService.class.php';
 require_once __DIR__.'/dao/SongDao.class.php';
 require_once __DIR__.'/services/PlaylistService.class.php';
-require_once __DIR__.'/dao/SongDao.class.php';
+require_once __DIR__.'/dao/PlaylistDao.class.php';
 require_once __DIR__.'/services/PlaylistSongsService.class.php';
 require_once __DIR__.'/dao/PlaylistSongsDao.class.php';
 require_once __DIR__.'/services/CountryService.class.php';

@@ -38,7 +38,7 @@ class BaseDao{
 
     //method to delete objects from database table
     public function delete_element($id){
-        $stmt = $this->conn->prepare("DELETE FROM user WHERE id=:id");
+        $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
         //SQL Injection prevention
         $stmt->bindParam(':id', $id);
         $stmt->execute();
