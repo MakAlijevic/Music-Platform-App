@@ -389,6 +389,7 @@ var UserService = {
             }
         });
     },
+
     chooseAvatar: function (id) {
         var photoid = document.getElementById(id);
         var url = photoid.getAttribute("src");

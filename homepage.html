@@ -16,7 +16,7 @@
 <header>
   <nav class="navbar navbar-dark bg-transparent">
     <div class="container-fluid">
-      <a class="navbar-brand ms-5" onclick="showHomepage()" style="font-size: 1.5rem;">SoundWave</a>
+      <a class="navbar-brand ms-5" onclick="SinglePageService.showHomepage()" style="font-size: 1.5rem;">SoundWave</a>
 
 
       <form class="d-flex" id="searchBar">
@@ -33,7 +33,7 @@
           <span class="d-none d-sm-inline mx-3" id="usernamesmall"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" onclick="showProfile()">Profile</a></li>
+          <li><a class="dropdown-item" onclick="SinglePageService.showProfile()">Profile</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -60,7 +60,7 @@
               <span class="d-none d-sm-inline mx-3" id="usernamelarge">Username</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" onclick="showProfile()">Profile</a></li>
+              <li><a class="dropdown-item" onclick="SinglePageService.showProfile()">Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -69,7 +69,7 @@
           </div>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-              <a onclick="showHomepage()" class="nav-link align-middle px-0">
+              <a onclick="SinglePageService.showHomepage()" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">Home</span>
               </a>
             </li>
@@ -83,7 +83,7 @@
               </ul>
             </li>
             <li>
-              <a onclick="showAboutUs()" class="nav-link pt-3 px-0 align-middle">
+              <a onclick="SinglePageService.showAboutUs()" class="nav-link pt-3 px-0 align-middle">
                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">About
                   us</span> </a>
             </li>
@@ -611,6 +611,7 @@
 <script src="javaScript/SongService.js"></script>
 <script src="javaScript/PlaylistService.js"></script>
 <script src="javaScript/SearchService.js"></script>
+<script src="javaScript/SinglePageService.js"></script>
 
 <script>
   UserService.getPhotoHomepage();
@@ -633,59 +634,17 @@
   UserService.getCountries();
   UserService.getCountry();
 
-  getSongs();
-  getPlaylist();
-  getPlaylists();
-  listPlaylists();
-  listPlaylistsModal();
+  SongService.getSongs();
+
+  PlaylistService.getPlaylist();
+  PlaylistService.getPlaylists();
+  PlaylistService.listPlaylists();
+  PlaylistService.listPlaylistsModal();
+
+  SearchService.init();
 
 </script>
-<script>
-  function showAboutUs() {
-    document.getElementById("aboutUs").classList.remove("d-none");
-    document.getElementById("homepage").classList.add("d-none");
-    document.getElementById("playlist").classList.add("d-none");
-    document.getElementById("search").classList.add("d-none");
-    document.getElementById("profile").classList.add("d-none");
-    document.getElementById("leftNavBar").classList.remove("d-none");
-  }
 
-  function showHomepage() {
-    document.getElementById("homepage").classList.remove("d-none");
-    document.getElementById("aboutUs").classList.add("d-none");
-    document.getElementById("playlist").classList.add("d-none");
-    document.getElementById("search").classList.add("d-none");
-    document.getElementById("profile").classList.add("d-none");
-    document.getElementById("leftNavBar").classList.remove("d-none");
-  }
-
-  function showPlaylist() {
-    document.getElementById("playlist").classList.remove("d-none");
-    document.getElementById("aboutUs").classList.add("d-none");
-    document.getElementById("homepage").classList.add("d-none");
-    document.getElementById("search").classList.add("d-none");
-    document.getElementById("profile").classList.add("d-none");
-    document.getElementById("leftNavBar").classList.remove("d-none");
-  }
-
-  function showSearch() {
-    document.getElementById("search").classList.remove("d-none");
-    document.getElementById("playlist").classList.add("d-none");
-    document.getElementById("aboutUs").classList.add("d-none");
-    document.getElementById("homepage").classList.add("d-none");
-    document.getElementById("profile").classList.add("d-none");
-    document.getElementById("leftNavBar").classList.remove("d-none");
-  }
-
-  function showProfile() {
-    document.getElementById("profile").classList.remove("d-none");
-    document.getElementById("search").classList.add("d-none");
-    document.getElementById("playlist").classList.add("d-none");
-    document.getElementById("aboutUs").classList.add("d-none");
-    document.getElementById("homepage").classList.add("d-none");
-    document.getElementById("leftNavBar").classList.add("d-none");
-  }
-</script>
 
 
 
@@ -725,7 +684,8 @@
       </div>
       <div class="modal-footer">
         <div class="col text-center ">
-          <button id="save" type="button" onClick="addNewPlaylist()" class="btn btn-primary">Save</button>
+          <button id="save" type="button" onClick="PlaylistService.addNewPlaylist()"
+            class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
