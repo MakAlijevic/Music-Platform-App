@@ -11,7 +11,7 @@
   Flight::route('GET /playlists', function(){
   // who is the user who calls this method?
   $validUser = Flight::get('validUser');
-  Flight::json(Flight::playlistDao()->get_playlist_by_user($validUser['id']));
+  Flight::json(Flight::playlistService()->get_playlist_by_user($validUser['id']));
 });
 
   //add playlist

@@ -9,7 +9,7 @@
   * )
   */
   Flight::route('GET /playlistsongs/@id', function($id){
-  Flight::json(Flight::playlistSongsDao()->get_songs_by_playlistID($id));
+  Flight::json(Flight::playlistSongsService()->get_songs_by_playlistID($id));
 });
 
   //add songs to playlist
