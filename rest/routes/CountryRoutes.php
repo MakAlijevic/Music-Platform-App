@@ -105,6 +105,6 @@
   * )
   */
   Flight::route('GET /country/getcountry/@name', function($name){
-    Flight::json(Flight::countryDao()->get_country_by_name($name));
+    Flight::json(Flight::countryService()->get_country_by_name($name));
   });
 ?>

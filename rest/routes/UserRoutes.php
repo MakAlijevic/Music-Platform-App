@@ -122,7 +122,7 @@ Flight::route('GET /photo',function(){
 */
 Flight::route('POST /register', function(){
   $registerUser = Flight::request()->data->getData();
-  $storedUser = Flight::userDao()->get_user_by_username($registerUser['username']);
+  $storedUser = Flight::userService()->get_user_by_username($registerUser['username']);
 
   if(isset($storedUser['id'])){
     Flight::json(["message"=>"User with that username already exists. Try different username."], 404);
@@ -158,7 +158,7 @@ Flight::route('POST /login', function(){
 
 $login = Flight::request()->data->getData();
 
-$user = Flight::userDao()->get_user_by_username($login['username']);
+$user = Flight::userService()->get_user_by_username($login['username']);
 
 if(isset($user['id'])){
 

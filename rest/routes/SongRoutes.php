@@ -7,7 +7,7 @@
 * )
 */
 Flight::route('GET /song/search/@search', function($search){
-  Flight::json(Flight::songDao()->get_songs_by_search($search));
+  Flight::json(Flight::songService()->get_songs_by_search($search));
 });
 
 //CRUD operations for song
@@ -121,6 +121,6 @@ Flight::route('GET /song/search/@search', function($search){
   * )
   */
   Flight::route('GET /song/getsong/@title', function($title){
-    Flight::json(Flight::songDao()->get_song_by_title($title));
+    Flight::json(Flight::songService()->get_song_by_title($title));
   });
 ?>
