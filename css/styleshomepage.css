@@ -10,6 +10,11 @@ body {
   font-family: 'Play', sans-serif;
 }
 
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .img-container {
   position: relative;
   width: 100px;
@@ -177,6 +182,33 @@ img[alt~="playlistPicture"] {
 .dropdown-menu {
   max-height: 250px;
   overflow-y: auto;
+}
+
+#addPlaylistBtn::before,
+#addPlaylistBtn::after {
+  --scale: 0;
+  position: absolute;
+  content: "";
+  font-size: 13px;
+  left: 85%;
+  transform: translateX(-50%) translateY(-100%) scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+#addPlaylistBtn::before {
+  content: attr(data-tooltip);
+  padding: .5rem;
+  width: max-content;
+  border-radius: .3rem;
+  text-align: center;
+  background: #333333;
+  color: white;
+}
+
+#addPlaylistBtn:hover::before,
+#addPlaylistBtn:hover::after {
+  --scale: 1;
 }
 
 footer {
