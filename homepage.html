@@ -276,7 +276,7 @@
           <div class="float-child" style="width: auto; float: left; padding: 20px; border: 2px;">
             <h2 class="ms-0 mb-0" style="font-size: 3rem;" id="playlistname"></h2>
           </div>
-          <div class="float-child" style="width: auto; float: left; padding: 20px; border: 1px;">
+          <div class="float-child" style="width: auto; float: right; padding: 20px; border: 1px;">
             <button type="button" class="btn btn-danger ms-0 mt-2" data-bs-toggle="modal"
               data-bs-target="#deletePlaylist">Remove this playlist</h2>
           </div>
@@ -576,19 +576,21 @@
       <div class="img-container">
         <img src="images/song1.jpg" alt="music-cover" id="cover" />
       </div>
-      <div class="tone-container float-end" style="width:150px;">
+      <div class="tone-container float-end" style="width:180px;">
         <div class="row">
-          <button type="button" class="btn btn-sm" style="color:#FFFFFF;" data-bs-toggle="modal"
-            data-bs-target="#addToPlaylistModal">
-            Add to playlist
+          <button type="button" id="addPlaylistBtn" class="col-1 me-2 btn btn-sm"
+            style="color:#FFFFFF; font-size: 25px; position: relative;" data-bs-toggle="modal"
+            data-bs-target="#addToPlaylistModal" data-tooltip="Add to playlist">
+            &#43;
           </button>
-
-          <button class="btn btn-lg btn-black rounded-circle shadow-none col-md-5"
+          <button class="col-2 ms-2 btn btn-lg btn-black rounded-circle shadow-none"
             style="background-color: rgba(58, 55, 55, 0); color: white; padding-right: 30px !important;" type="button"
             id="volume">
             <i class="fas fa-volume-up"></i>
           </button>
-          <div class="sound-container float-end col-lg" id="sound-container">
+          <div class="col-1">
+          </div>
+          <div class="col-8 sound-container float-end col-lg" id="sound-container">
             <div class="sound-progress" id="sound-progress">
             </div>
           </div>

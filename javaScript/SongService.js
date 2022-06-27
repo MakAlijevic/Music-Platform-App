@@ -152,7 +152,7 @@ var SongService = {
           songs.push(data[i].title);
           var html = "";
           html += `<div class="card bg-dark text-white">
-              <img class="card-img" src="`+ data[i].cover + `.jpg" alt="Card image" style="opacity:0.8;">
+              <img class="card-img" src="`+ data[i].cover + `.jpg" alt="Card image" id="cardImage" style="opacity:0.8;">
               <div class="card-img-overlay">
                 <h5 class="card-title mt-5" style="text-align: center">`+ data[i].title + `</h5>
                 <div class="form-group" style="text-align: center">
