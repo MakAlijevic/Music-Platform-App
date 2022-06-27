@@ -125,24 +125,24 @@ body {
   height: 250px;
 }
 
-.card:hover {
+.card:hover #cardImage {
   cursor: pointer;
   animation: pop 0.7s ease-in-out forwards;
 }
 
 @keyframes pop {
   from {
-    opacity: inherit;
+    opacity: 0.8;
   }
 
   to {
-    opacity: 0.8;
+    opacity: 0.3;
   }
 }
 
 .card-img {
   max-width: 100%;
-  height: 30em;
+  max-height: 30rem;
 }
 
 .carousel-control-prev,
