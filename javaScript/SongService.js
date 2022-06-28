@@ -1,5 +1,5 @@
 //Selectors
-const songs = [];
+let songs = [];
 const musicContainer = document.querySelector('.footer');
 const playBtn = document.querySelector('#play');
 const prevBtn = document.querySelector('#prev');
@@ -176,9 +176,67 @@ var SongService = {
   },
 
   getRandomSong: function (id) {
+    songs = [];
+    $.ajax({
+      type: "GET",
+      url: ' rest/song',
+      async: false,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          songs.push(data[i].title);
+        }
+      }
+    });
     const player = document.querySelector('#bottomPlayer');
     player.style.display = `flex`;
     songIndex = id;
+    SongService.loadSong(songs[songIndex]);
+    SongService.playSong();
+  },
+
+  getPlaylistSong: function (id, songID) {
+    songs = [];
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlistsongs/' + id,
+      async: false,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          songs.push(data[i].title);
+        }
+      }
+    });
+    const player = document.querySelector('#bottomPlayer');
+    player.style.display = `flex`;
+    songIndex = songID;
+    SongService.loadSong(songs[songIndex]);
+    SongService.playSong();
+  },
+
+  playPlaylist: function (id) {
+    songs = [];
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlistsongs/' + id,
+      async: false,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          songs.push(data[i].title);
+        }
+      }
+    });
+    const player = document.querySelector('#bottomPlayer');
+    player.style.display = `flex`;
+    songIndex = 0;
     SongService.loadSong(songs[songIndex]);
     SongService.playSong();
   },

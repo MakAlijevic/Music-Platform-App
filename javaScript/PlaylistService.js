@@ -12,7 +12,7 @@ var PlaylistService = {
         for (let i = 0; i < data.length; i++) {
           html += `
             <li class="w-100">
-              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
+              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:gray;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
             </li>
           `;
 
@@ -59,7 +59,7 @@ var PlaylistService = {
       success: function (data) {
         $('#addPlaylistModal').modal('hide');
         PlaylistService.addToPlaylist(data.id);
-         window.location.reload();
+        window.location.reload();
 
       }
     });
@@ -162,7 +162,7 @@ var PlaylistService = {
         var html = "";
         for (let i = 0; i < data.length; i++) {
           html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
-                  aria-current="true" style="color: white;">
+                  aria-current="true" style="color: white;" onClick="SongService.getPlaylistSong(` + id + `, ` + i + `)">
                   <div class="row mt-3">
                       <div class="col-1">
                           <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
@@ -178,41 +178,40 @@ var PlaylistService = {
               </button>`;
           $("#playlistList").html(html);
         }
+        $("#playPlaylistBtn").attr("onclick", "SongService.playPlaylist(" + id + ")");
       }
     });
   },
-  getPlaylistID: function()
-  {
-    var id="";
+  getPlaylistID: function () {
+    var id = "";
     $.ajax({
       type: "GET",
       url: ' rest/playlists',
-      async:false,
+      async: false,
       beforeSend: function (xhr) {
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
         for (let i = 0; i < data.length; i++) {
           if (data[i].name == $('#playlistname').text()) {
-            id=data[i].id;
+            id = data[i].id;
           }
         }
       }
     });
     return id;
   },
-  deletePlaylist: function()
-  {
+  deletePlaylist: function () {
     var id = PlaylistService.getPlaylistID();
     $.ajax({
-        type: "DELETE",
-        url: ' rest/playlists/' + id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function (data) {
-            window.location.reload();
-        }
+      type: "DELETE",
+      url: ' rest/playlists/' + id,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        window.location.reload();
+      }
     });
   }
 }

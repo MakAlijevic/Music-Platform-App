@@ -276,6 +276,12 @@
           <div class="float-child" style="width: auto; float: left; padding: 20px; border: 2px;">
             <h2 class="ms-0 mb-0" style="font-size: 3rem;" id="playlistname"></h2>
           </div>
+          <div class="float-child mt-2 ms-3" style="width: auto; float: left; padding: 20px; border: 2px;"
+            id="playPlaylistBtn" data-tooltip="Play this playlist">
+            <div style="background: rgb(71, 71, 71); border-radius: 50%;">
+              <button type="button" class="btn" style="color: white; font-size: 20px;">▶</h2>
+            </div>
+          </div>
           <div class="float-child" style="width: auto; float: right; padding: 20px; border: 1px;">
             <button type="button" class="btn btn-danger ms-0 mt-2" data-bs-toggle="modal"
               data-bs-target="#deletePlaylist">Remove this playlist</h2>
@@ -441,37 +447,39 @@
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4 pt-3">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input name="name" type="text" id="editFirstName" class="form-control" required />
-                      <label class="form-label w-100" for="form3Example1c" style="color:#DDDBF1;text-align:center;">Your
+                      <input name="name" type="text" id="editFirstName" class="form-control" style="text-align: center;"
+                        required />
+                      <label class="form-label w-100" form="form3Example1c"
+                        style="color:#DDDBF1;text-align:center;">Your
                         Name</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input name="surname" type="text" id="editLastName" class="form-control" required />
-                      <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Your
+                      <input name="surname" type="text" id="editLastName" class="form-control"
+                        style="text-align: center;" required />
+                      <label class="form-label w-100" form="form3Example3c"
+                        style="color:#DDDBF1;text-align:center;">Your
                         Surname</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="editEmail" class="form-control" required />
-                      <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Your
+                      <input type="text" id="editEmail" class="form-control" style="text-align: center;" required />
+                      <label class="form-label w-100" form="form3Example3c"
+                        style="color:#DDDBF1;text-align:center;">Your
                         Email</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input name="username" type="text" id="editUsername" class="form-control" required />
-                      <label class="form-label w-100" for="form3Example3c"
+                      <input name="username" type="text" id="editUsername" class="form-control"
+                        style="text-align: center;" required />
+                      <label class="form-label w-100" form="form3Example3c"
                         style="color:#DDDBF1;text-align:center;">Username</label>
                     </div>
                   </div>
@@ -479,7 +487,7 @@
                   <div class="form-group" style="color:#DDDBF1; padding: 20px;">
                     <input name="dob" type="date" id="editDateOfBirth" class="form-control " placeholder="Date of Birth"
                       required>
-                    <label class="form-label w-100" for="form3Example3c" style="color:#DDDBF1;text-align:center;">Date
+                    <label class="form-label w-100" form="form3Example3c" style="color:#DDDBF1;text-align:center;">Date
                       Of
                       Birth</label>
                   </div>
