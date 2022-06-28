@@ -12,7 +12,7 @@ var PlaylistService = {
         for (let i = 0; i < data.length; i++) {
           html += `
             <li class="w-100">
-              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:white;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
+              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:gray;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
             </li>
           `;
 
@@ -59,7 +59,7 @@ var PlaylistService = {
       success: function (data) {
         $('#addPlaylistModal').modal('hide');
         PlaylistService.addToPlaylist(data.id);
-         window.location.reload();
+        window.location.reload();
 
       }
     });
@@ -181,38 +181,36 @@ var PlaylistService = {
       }
     });
   },
-  getPlaylistID: function()
-  {
-    var id="";
+  getPlaylistID: function () {
+    var id = "";
     $.ajax({
       type: "GET",
       url: ' rest/playlists',
-      async:false,
+      async: false,
       beforeSend: function (xhr) {
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
         for (let i = 0; i < data.length; i++) {
           if (data[i].name == $('#playlistname').text()) {
-            id=data[i].id;
+            id = data[i].id;
           }
         }
       }
     });
     return id;
   },
-  deletePlaylist: function()
-  {
+  deletePlaylist: function () {
     var id = PlaylistService.getPlaylistID();
     $.ajax({
-        type: "DELETE",
-        url: ' rest/playlists/' + id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function (data) {
-            window.location.reload();
-        }
+      type: "DELETE",
+      url: ' rest/playlists/' + id,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        window.location.reload();
+      }
     });
   }
 }
