@@ -199,7 +199,6 @@ var SongService = {
 
   getPlaylistSong: function (id, songID) {
     songs = [];
-    console.log(songs);
     $.ajax({
       type: "GET",
       url: ' rest/playlistsongs/' + id,
@@ -218,7 +217,28 @@ var SongService = {
     songIndex = songID;
     SongService.loadSong(songs[songIndex]);
     SongService.playSong();
-    console.log(songs);
+  },
+
+  playPlaylist: function (id) {
+    songs = [];
+    $.ajax({
+      type: "GET",
+      url: ' rest/playlistsongs/' + id,
+      async: false,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        for (let i = 0; i < data.length; i++) {
+          songs.push(data[i].title);
+        }
+      }
+    });
+    const player = document.querySelector('#bottomPlayer');
+    player.style.display = `flex`;
+    songIndex = 0;
+    SongService.loadSong(songs[songIndex]);
+    SongService.playSong();
   },
 
 

@@ -211,6 +211,19 @@ img[alt~="playlistPicture"] {
   --scale: 1;
 }
 
+#playPlaylistBtn:hover {
+  cursor: pointer;
+  transform: scale(1.20);
+}
+
+#playPlaylistBtn {
+  transition: all .2s ease-in-out;
+}
+
+#playPlaylistBtn:hover {
+  transform: scale(1.1);
+}
+
 ::-webkit-scrollbar {
   width: 1em;
   background-image: linear-gradient(rgb(28, 10, 46), black);

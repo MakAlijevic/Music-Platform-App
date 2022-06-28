@@ -178,6 +178,7 @@ var PlaylistService = {
               </button>`;
           $("#playlistList").html(html);
         }
+        $("#playPlaylistBtn").attr("onclick", "SongService.playPlaylist(" + id + ")");
       }
     });
   },
