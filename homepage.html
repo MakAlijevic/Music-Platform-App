@@ -69,23 +69,26 @@
           </div>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-              <a onclick="SinglePageService.showHomepage()" class="nav-link align-middle px-0">
+              <button onclick="SinglePageService.showHomepage()" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">Home</span>
-              </a>
+              </button>
             </li>
-
             <li>
-              <a href="#submenu3" data-bs-toggle="collapse" class="nav-link pt-3 px-0 align-middle">
+              <button href="#submenu3" data-bs-toggle="collapse" class="nav-link pt-3 px-0 align-middle">
                 <i class="fs-5 bi-grid"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">My
-                  Playlists</span> </a>
+                  Playlists ▾</span> </button>
               <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-
               </ul>
             </li>
             <li>
-              <a onclick="SinglePageService.showAboutUs()" class="nav-link pt-3 px-0 align-middle">
+              <button onclick="SinglePageService.showAllSongs()" class="nav-link pt-3 px-0 align-middle">
+                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">All
+                  songs</span> </button>
+            </li>
+            <li>
+              <button onclick="SinglePageService.showAboutUs()" class="nav-link pt-3 px-0 align-middle">
                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline" style="color:white;">About
-                  us</span> </a>
+                  us</span> </button>
             </li>
           </ul>
           <hr>
@@ -309,6 +312,17 @@
               <button type="button" class="btn btn-danger " onClick="PlaylistService.deletePlaylist()">Delete</button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!--All Songs-->
+      <div class="col py-3 d-none" id="allSongs">
+        <div class="container pt-5" style="height: 100px;">
+        </div>
+        <h1 class="ms-5 pb-4">All songs:</h1>
+        <div class="d-flex justify-content-start mt-5 ms-5">
+        </div>
+        <div class="list-group" id="allSongsList">
         </div>
       </div>
 
@@ -604,7 +618,7 @@
           </div>
         </div>
       </div>
-      <div class="container fixed" style="width:500px;">
+      <div class="container fixed" style="width:700px;">
         <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
           <button class="btn btn-black rounded-circle me-3 shadow-none" style="background-color: #0f0f0f; color: white;"
             type="button" id="prev">
@@ -628,7 +642,7 @@
           <h6 class="total-time" id="total-time">0:00</h6>
         </div>
         <div class="navigation d-grid gap-2 d-md-flex justify-content-md-center">
-          <div class="music-info">
+          <div class="music-info" width="auto">
             <h4 id="title">title</h4>
           </div>
         </div>
@@ -671,6 +685,7 @@
   UserService.getCountry();
 
   SongService.getSongs();
+  SongService.listAllSongs();
 
   PlaylistService.getPlaylist();
   PlaylistService.getPlaylists();

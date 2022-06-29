@@ -6,6 +6,7 @@ var SinglePageService = {
         $("#search").addClass("d-none");
         $("#profile").addClass("d-none");
         $("#leftNavBar").removeClass("d-none");
+        $("#allSongs").addClass("d-none");
     },
 
     showHomepage: function () {
@@ -15,6 +16,7 @@ var SinglePageService = {
         $("#search").addClass("d-none");
         $("#profile").addClass("d-none");
         $("#leftNavBar").removeClass("d-none");
+        $("#allSongs").addClass("d-none");
     },
 
     showPlaylist: function () {
@@ -24,6 +26,7 @@ var SinglePageService = {
         $("#search").addClass("d-none");
         $("#profile").addClass("d-none");
         $("#leftNavBar").removeClass("d-none");
+        $("#allSongs").addClass("d-none");
     },
 
     showSearch: function () {
@@ -33,6 +36,7 @@ var SinglePageService = {
         $("#homepage").addClass("d-none");
         $("#profile").addClass("d-none");
         $("#leftNavBar").removeClass("d-none");
+        $("#allSongs").addClass("d-none");
     },
 
     showProfile: function () {
@@ -42,5 +46,16 @@ var SinglePageService = {
         $("#aboutUs").addClass("d-none");
         $("#homepage").addClass("d-none");
         $("#leftNavBar").addClass("d-none");
-    }
+        $("#allSongs").addClass("d-none");
+    },
+
+    showAllSongs: function () {
+        $("#allSongs").removeClass("d-none");
+        $("#search").addClass("d-none");
+        $("#playlist").addClass("d-none");
+        $("#aboutUs").addClass("d-none");
+        $("#homepage").addClass("d-none");
+        $("#profile").addClass("d-none");
+        $("#leftNavBar").removeClass("d-none");
+    },
 }
