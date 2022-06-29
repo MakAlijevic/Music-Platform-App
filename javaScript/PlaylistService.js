@@ -12,7 +12,7 @@ var PlaylistService = {
         for (let i = 0; i < data.length; i++) {
           html += `
             <li class="w-100">
-              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:gray;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">` + data[i].name + `</span></button>
+              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:gray;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">  ▸ ` + data[i].name + `</span></button>
             </li>
           `;
 
