@@ -15,6 +15,33 @@ var UserService = {
         });
 
         $('#registerForm').validate({
+          rules: {
+            firstName: {
+                minlength: 2,
+                required: true,
+                maxlength: 35,
+            },
+            lastName: {
+                minlength: 2,
+                required: true,
+                maxlength: 35,
+            },
+            username: {
+                minlength: 4,
+                required: true,
+                maxlength: 20,
+            },
+            email: {
+                required: true,
+                email:true,
+
+            },
+            password: {
+                minlength: 8,
+                maxlength: 30,
+                required: true,
+            }
+        },
             submitHandler: function (form) {
                 var user = {};
                 user.name = $('#registerName').val();
@@ -456,7 +483,7 @@ var UserService = {
                 var html = "";
                 for (let i = 0; i < data.length; i++) {
                     html += `<li><a class="dropdown-item" onClick="UserService.setCountry('` + data[i].name + `')">` + data[i].name + `</a></li>`;
-                    localStorage.setItem(data[i].name, data[i].id);
+                    //localStorage.setItem(data[i].name, data[i].id);
                 }
                 $("#countryDropdown").html(html);
             }
