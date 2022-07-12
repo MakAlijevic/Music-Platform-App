@@ -170,6 +170,7 @@ var SongService = {
           $("#2-carousel-item-" + (i - 8)).html(html);
           $("#3-carousel-item-" + (i - 16)).html(html);
           $("#4-carousel-item-" + (i - 24)).html(html);
+          $("#5-carousel-item-" + (i - 32)).html(html);
         }
       }
     });
