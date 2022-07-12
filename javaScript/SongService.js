@@ -294,6 +294,16 @@ var SongService = {
 
     });
     return result;
+  },
+
+  hidePlayer: function () {
+    $("#bottomPlayer").addClass("d-none");
+    $("#openButton").removeClass("d-none");
+  },
+
+  showPlayer: function () {
+    $("#openButton").addClass("d-none");
+    $("#bottomPlayer").removeClass("d-none");
   }
 }
 
