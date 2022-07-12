@@ -291,7 +291,8 @@
                 <h1 class="ms-5 pt-2" style="font-size: 65px;">About Us</h1>
               </div>
               <div class="mt-5 pt-5" style="max-width:550px; word-wrap:break-word;">
-                <p class="text-center" style="font-size:20px;">SoundWave is a project application made for the Introduction to Web Programming course.</p>
+                <p class="text-center" style="font-size:20px;">SoundWave is a project application made for the
+                  Introduction to Web Programming course.</p>
               </div>
             </div>
 
@@ -589,20 +590,21 @@
     <div class="container p-4 pb-0 pt-5 mt-5">
       <section class="mb-4">
         <!-- Facebook -->
-        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.facebook.com/effyexe/" target="_blank" role="button"><i
-            class="fab fa-facebook-f"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.facebook.com/effyexe/"
+          target="_blank" role="button"><i class="fab fa-facebook-f"></i></a>
 
         <!-- Google -->
-        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.google.com/" target="_blank" role="button"><i
-            class="fab fa-google"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.google.com/" target="_blank"
+          role="button"><i class="fab fa-google"></i></a>
 
         <!-- Instagram -->
-        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.instagram.com/mak_alijevic/" target="_blank" role="button"><i
-            class="fab fa-instagram"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://www.instagram.com/mak_alijevic/"
+          target="_blank" role="button"><i class="fab fa-instagram"></i></a>
 
 
         <!-- Github -->
-        <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://github.com/eminasirbubalo/Music-Platform-App" target="_blank" role="button"><i
+        <a class="btn btn-outline-light btn-floating m-1 rounded-circle"
+          href="https://github.com/eminasirbubalo/Music-Platform-App" target="_blank" role="button"><i
             class="fab fa-github"></i></a>
       </section>
     </div>
@@ -613,8 +615,20 @@
     </div>
   </footer>
 
-  <div id="bottomPlayer" style="display: none;">
+
+  <div class="float-container pb-5 pt-3 mt-5 fixed-bottom d-none" style="border: 3px; padding: 20px;" id="openButton">
+    <div class="float-child ms-5"
+      style="width: auto; float: left; padding: 10px; border: 1px; background: rgb(71, 71, 71); border-radius: 50%;"
+      onclick="SongService.showPlayer()">
+      <button type="button" class="btn" style="color: white; font-size: 25px; width: 50px;">▲</h2>
+    </div>
+  </div>
+
+  <div id="bottomPlayer" style="display: none;" class="">
     <div class="footer py-2 fixed-bottom" style="height: 118px;" id="music-container">
+      <div id="hideButton" style="position: absolute; right: 10px; top: 5px; font-size: 17px;">
+        <button type="button" class="btn" onclick="SongService.hidePlayer()" style="color: white;">✖</button>
+      </div>
       <div class="img-container">
         <img src="images/song1.jpg" alt="music-cover" id="cover" />
       </div>
