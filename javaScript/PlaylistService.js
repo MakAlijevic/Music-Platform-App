@@ -50,24 +50,50 @@ var PlaylistService = {
     var playlist = {};
     playlist.userID = UserService.getID();
     playlist.name = $('#playlistName').val();
+    if(PlaylistService.checkIfExists(playlist.name))
+    {
+      alert("Playlist with this name already exists!");
+    }
+    else {
+      $.ajax({
+        type: "POST",
+        url: ' rest/playlists',
+        data: JSON.stringify(playlist),
+        contentType: "application/json",
+        dataType: "json",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function (data) {
+          $('#addPlaylistModal').modal('hide');
+          PlaylistService.addToPlaylist(data.id);
+          window.location.reload();
+
+        }
+      });
+    }
+  },
+
+  checkIfExists: function(name) {
+    var check=false;
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: ' rest/playlists',
-      data: JSON.stringify(playlist),
-      contentType: "application/json",
-      dataType: "json",
+      async:false,
       beforeSend: function (xhr) {
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
-        $('#addPlaylistModal').modal('hide');
-        PlaylistService.addToPlaylist(data.id);
-        window.location.reload();
-
+       for (let i = 0; i < data.length; i++) {
+         if(data[i].name==name)
+         {
+           check=true;
+         }
       }
+    }
     });
+      return check;
   },
-
 
   addNewPlaylistModal: function () {
     $('#addPlaylistModal').modal('toggle');
