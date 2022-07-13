@@ -120,16 +120,7 @@ var UserService = {
     getFirstName: function () {
         if (localStorage.hasOwnProperty('name')) {
             $("#profileFirstName").text(localStorage.getItem("name"));
-            $.ajax({
-                type: "GET",
-                url: ' rest/firstname',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $('#editFirstName').val(data);
-                }
-            });
+              $('#editFirstName').val(localStorage.getItem("name"));
 
         }
         else {
@@ -150,16 +141,7 @@ var UserService = {
     getLastName: function () {
         if (localStorage.hasOwnProperty('surname')) {
             $("#profileLastName").text(localStorage.getItem("surname"));
-            $.ajax({
-                type: "GET",
-                url: ' rest/lastname',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $('#editLastName').val(data);
-                }
-            });
+              $('#editLastName').val(localStorage.getItem("surname"));
 
         }
         else {
@@ -180,16 +162,7 @@ var UserService = {
     getUsername: function () {
         if (localStorage.hasOwnProperty('username')) {
             $("#profileUsername").text(localStorage.getItem("username"));
-            $.ajax({
-                type: "GET",
-                url: ' rest/username',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $('#editUsername').val(data);
-                }
-            });
+            $('#editUsername').val(localStorage.getItem("username"));
         }
         else {
             $.ajax({
@@ -229,17 +202,7 @@ var UserService = {
     getEmail: function () {
         if (localStorage.hasOwnProperty('email')) {
             $("#profileEmail").text(localStorage.getItem("email"));
-            $.ajax({
-                type: "GET",
-                url: ' rest/email',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $('#editEmail').val(data);
-                }
-            });
-
+            $('#editEmail').val(localStorage.getItem("email"));
         }
         else {
             $.ajax({
@@ -259,17 +222,7 @@ var UserService = {
     getDateOfBirth: function () {
         if (localStorage.hasOwnProperty('dateOfBirth')) {
             $("#profileDateOfBirth").text(localStorage.getItem("dateOfBirth"));
-            $.ajax({
-                type: "GET",
-                url: ' rest/dob',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $('#editDateOfBirth').val(data);
-                }
-            });
-
+            $('#editDateOfBirth').val(localStorage.getItem("dateOfBirth"));
         }
         else {
             $.ajax({
@@ -483,7 +436,7 @@ var UserService = {
                 var html = "";
                 for (let i = 0; i < data.length; i++) {
                     html += `<li><a class="dropdown-item" onClick="UserService.setCountry('` + data[i].name + `')">` + data[i].name + `</a></li>`;
-                    //localStorage.setItem(data[i].name, data[i].id);
+                    localStorage.setItem(data[i].name, data[i].id);
                 }
                 $("#countryDropdown").html(html);
             }
