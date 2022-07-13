@@ -1,4 +1,5 @@
 var PlaylistService = {
+  //dropdown playlists
   listPlaylists: function () {
     $.ajax({
       type: "GET",
@@ -8,11 +9,13 @@ var PlaylistService = {
       },
       success: function (data) {
         $("#submenu3").html("");
-        var html = "";
+        var html = `  <li class="w-100">
+            <h5 class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:#b3b3b3; text-align:center;">  ... </span></h5>
+          </li> `
         for (let i = 0; i < data.length; i++) {
           html += `
             <li class="w-100">
-              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:gray;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">  ▸ ` + data[i].name + `</span></button>
+              <button class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:#b3b3b3;" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)"">  ▸ ` + data[i].name + `</span></button>
             </li>
           `;
 
@@ -21,7 +24,7 @@ var PlaylistService = {
       }
     });
   },
-
+//add playlist modal
   listPlaylistsModal: function () {
     $.ajax({
       type: "GET",
@@ -89,7 +92,7 @@ var PlaylistService = {
       }
     });
   },
-
+//on profile
   getPlaylists: function () {
     $.ajax({
       type: "GET",
@@ -130,7 +133,7 @@ var PlaylistService = {
       }
     });
   },
-
+//go to playlist
   getPlaylist: function (id) {
     $.ajax({
       type: "GET",
