@@ -12,8 +12,6 @@ class PlaylistSongsDao extends BaseDao{
       return $this->query("SELECT song.id,song.title,song.cover,song.path,song.duration FROM playlist_songs INNER JOIN song ON playlist_songs.songID=song.id where playlistID= :playlistID;", ['playlistID' => $playlistID]);
     }
 
-//add songs
-
 
 }
 ?>

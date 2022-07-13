@@ -107,7 +107,7 @@ var PlaylistService = {
           html += `
         <div class="col mt-3">
           <h4 class="text-center mt-5">`+ data[i].name + `</h4>
-           <a href="#" onClick="PlaylistService.getPlaylist(`+ data[i].id + `)">
+           <a onClick="PlaylistService.getPlaylist(`+ data[i].id + `)">
             <img src="" id="`+ data[i].id + `" class="img-fluid" style="width:400px; height:300px;"alt="playlistPicture">
              </a>
         </div>

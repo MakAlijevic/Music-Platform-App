@@ -9,7 +9,6 @@
   * )
   */
   Flight::route('GET /playlists', function(){
-  // who is the user who calls this method?
   $validUser = Flight::get('validUser');
   Flight::json(Flight::playlistService()->get_playlist_by_user($validUser['id']));
 });
@@ -38,7 +37,7 @@
 * )
 */
   Flight::route('POST /playlists', function(){
-    Flight::json(Flight::playlistService()->add_element(Flight::request()->data->getData()));
+    Flight::json(Flight::playlistService()->add(Flight::get('validUser'),Flight::request()->data->getData()));
 });
 
   //delete playlist
@@ -59,7 +58,7 @@
 * )
 */
   Flight::route('DELETE /playlists/@id', function($id){
-    Flight::playlistService()->delete_element($id);
+    Flight::playlistService()->delete(Flight::get('validUser'),$id);
     Flight::json(["message" => "deleted"]);
   });
 
@@ -89,7 +88,7 @@
 */
   Flight::route('PUT /playlists/@id', function($id){
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::playlistService()->update_element($id, $data));
+    Flight::json(Flight::playlistService()->update(Flight::get('validUser'),$id, $data));
   });
 
 
