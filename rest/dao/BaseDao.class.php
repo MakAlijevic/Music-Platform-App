@@ -101,9 +101,9 @@ class BaseDao{
         $this->update($id, $entity);
     }
 
-    //method to search objects by given query
-    public function search_elements_by_query($query){
-      $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE title LIKE '%".$query."%'");
+    //method for query
+    public function query_without_params($query){
+      $stmt = $this->conn->prepare($query);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

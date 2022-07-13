@@ -9,7 +9,7 @@ class SongDao extends BaseDao{
     }
 
     public function get_songs_by_search($search){
-      return $this->search_elements_by_query($search);
+      return $this->query_without_params("SELECT * FROM song WHERE title LIKE '%".$search."%'");
     }
 
     public function get_song_by_title($title){
