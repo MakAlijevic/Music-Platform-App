@@ -95,6 +95,7 @@ var PlaylistService = {
       return check;
   },
 
+
   addNewPlaylistModal: function () {
     $('#addPlaylistModal').modal('toggle');
     $('#addToPlaylistModal').modal('hide');
@@ -163,54 +164,39 @@ var PlaylistService = {
   getPlaylist: function (id) {
     $.ajax({
       type: "GET",
-      url: ' rest/playlists',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-      },
-      success: function (data) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].id == id) {
-            SinglePageService.showPlaylist();
-            $('#playlistname').text(data[i].name);
-            PlaylistService.getPlaylistSongs(data[i].id);
-          }
-        }
-      }
-    });
-  },
-
-
-  getPlaylistSongs: function (id) {
-    $.ajax({
-      type: "GET",
       url: ' rest/playlistsongs/' + id,
       beforeSend: function (xhr) {
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
       },
       success: function (data) {
-        var html = "";
         for (let i = 0; i < data.length; i++) {
-          html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
-                  aria-current="true" style="color: white;" onClick="SongService.getPlaylistSong(` + id + `, ` + i + `)">
-                  <div class="row mt-3">
-                      <div class="col-1">
-                          <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
-                              height="90px" width="90px">
-                      </div>
-                      <div class="col-9 ms-5" style="font-size: 25px; padding: 10px 0;">
-                          `+ data[i].title + `<br>
-                          <div style="font-size: 15px; color: gray;">
-                          `+ data[i].duration + `
+            SinglePageService.showPlaylist();
+            $('#playlistname').text(data[i].name);
+            var html = "";
+            for (let i = 0; i < data.length; i++) {
+              html += `<button type="button" class="pb-4 list-group-item list-group-item-action bg-transparent"
+                      aria-current="true" style="color: white;" onClick="SongService.getPlaylistSong(` + id + `, ` + i + `)">
+                      <div class="row mt-3">
+                          <div class="col-1">
+                              <img class="search-cover" src="`+ data[i].cover + `.jpg" alt="Card image"
+                                  height="90px" width="90px">
+                          </div>
+                          <div class="col-9 ms-5" style="font-size: 25px; padding: 10px 0;">
+                              `+ data[i].title + `<br>
+                              <div style="font-size: 15px; color: gray;">
+                              `+ data[i].duration + `
+                              </div>
                           </div>
                       </div>
-                  </div>
-              </button>`;
-          $("#playlistList").html(html);
-        }
-        $("#playPlaylistBtn").attr("onclick", "SongService.playPlaylist(" + id + ")");
+                  </button>`;
+              $("#playlistList").html(html);
+            }
+            $("#playPlaylistBtn").attr("onclick", "SongService.playPlaylist(" + id + ")");
+          }
       }
     });
   },
+
   getPlaylistID: function () {
     var id = "";
     $.ajax({
